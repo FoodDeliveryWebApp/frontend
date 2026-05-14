@@ -1,0 +1,52 @@
+<div class="page-container">
+  <h1 class="section-title">Restaurant Applications</h1>
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else if (applications.length === 0) {
+    <p class="empty">No applications found.</p>
+  } @else {
+    @for (app of applications; track app.id) {
+      <mat-card class="app-card">
+        <mat-card-header>
+          <mat-card-title>{{ app.restaurantName }}</mat-card-title>
+          <mat-card-subtitle>{{ app.cuisine }} · {{ app.address }}</mat-card-subtitle>
+          <span [class]="'status-badge ' + statusClass(app.status)" style="margin-left: auto">
+            {{ app.status }}
+          </span>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-divider></mat-divider>
+          <div class="info-grid">
+            <div><strong>Phone:</strong> {{ app.phoneNumber }}</div>
+            <div><strong>Manager:</strong> {{ app.managerName }} {{ app.managerSurname }}</div>
+            <div><strong>Email:</strong> {{ app.managerEmail }}</div>
+            <div><strong>Username:</strong> {{ app.managerUsername }}</div>
+          </div>
+          @if (app.adminComment) {
+            <p class="admin-comment"><em>Admin note: {{ app.adminComment }}</em></p>
+          }
+          @if (processingId === app.id) {
+            <form [formGroup]="commentForm" (ngSubmit)="confirm()">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Admin comment (optional)</mat-label>
+                <textarea matInput formControlName="adminComment" rows="2"></textarea>
+              </mat-form-field>
+              <div class="confirm-actions">
+                <button mat-raised-button [color]="processingDecision === 'Approved' ? 'primary' : 'warn'" type="submit">
+                  Confirm {{ processingDecision }}
+                </button>
+                <button mat-button type="button" (click)="processingId = null">Cancel</button>
+              </div>
+            </form>
+          }
+        </mat-card-content>
+        @if (app.status === 'Pending' && processingId !== app.id) {
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="startProcess(app.id!, 'Approved')">Approve</button>
+            <button mat-stroked-button color="warn" (click)="startProcess(app.id!, 'Rejected')">Reject</button>
+          </mat-card-actions>
+        }
+      </mat-card>
+    }
+  }
+</div>

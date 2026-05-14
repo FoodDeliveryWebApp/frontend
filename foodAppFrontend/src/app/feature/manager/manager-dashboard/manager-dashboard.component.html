@@ -1,0 +1,46 @@
+<div class="page-container">
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else {
+    @if (restaurant) {
+      <h1 class="section-title">{{ restaurant.name }}</h1>
+      <p class="subtitle">{{ restaurant.cuisine }} · {{ restaurant.address }}</p>
+    } @else {
+      <h1 class="section-title">Manager Dashboard</h1>
+    }
+
+    <div class="action-grid">
+      <mat-card class="action-card" routerLink="/manager/add-worker">
+        <mat-card-content>
+          <mat-icon class="action-icon">person_add</mat-icon>
+          <h3>Add Worker</h3>
+          <p>Register a new worker for your restaurant</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="action-card" routerLink="/manager/add-food">
+        <mat-card-content>
+          <mat-icon class="action-icon">restaurant_menu</mat-icon>
+          <h3>Add Food Item</h3>
+          <p>Add new items to the menu</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="action-card" routerLink="/manager/earnings">
+        <mat-card-content>
+          <mat-icon class="action-icon">attach_money</mat-icon>
+          <h3>Earnings</h3>
+          <p>View orders and total revenue</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="action-card" routerLink="/manager/ratings">
+        <mat-card-content>
+          <mat-icon class="action-icon">star</mat-icon>
+          <h3>Ratings</h3>
+          <p>View and manage customer ratings</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+</div>

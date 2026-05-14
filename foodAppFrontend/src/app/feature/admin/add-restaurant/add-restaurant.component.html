@@ -1,0 +1,95 @@
+<div class="page-container">
+  <h1 class="section-title">Add Restaurant</h1>
+  <mat-card class="form-card">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <h3>Restaurant Info</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Restaurant Name</mat-label>
+          <input matInput formControlName="name" />
+          @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+            <mat-error>Required</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" />
+          @if (form.get('address')?.hasError('required') && form.get('address')?.touched) {
+            <mat-error>Required</mat-error>
+          }
+        </mat-form-field>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phoneNumber" />
+            @if (form.get('phoneNumber')?.hasError('required') && form.get('phoneNumber')?.touched) {
+              <mat-error>Required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Cuisine</mat-label>
+            <mat-select formControlName="cuisine">
+              @for (c of cuisines; track c) {
+                <mat-option [value]="c">{{ c }}</mat-option>
+              }
+            </mat-select>
+            @if (form.get('cuisine')?.hasError('required') && form.get('cuisine')?.touched) {
+              <mat-error>Required</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Image URL</mat-label>
+          <input matInput formControlName="imageUrl" />
+        </mat-form-field>
+
+        <mat-divider style="margin: 16px 0"></mat-divider>
+        <h3>Manager Account</h3>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="managerName" />
+            @if (form.get('managerName')?.hasError('required') && form.get('managerName')?.touched) {
+              <mat-error>Required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="managerSurname" />
+            @if (form.get('managerSurname')?.hasError('required') && form.get('managerSurname')?.touched) {
+              <mat-error>Required</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Manager Email</mat-label>
+          <input matInput type="email" formControlName="managerEmail" />
+          @if (form.get('managerEmail')?.hasError('required') && form.get('managerEmail')?.touched) {
+            <mat-error>Required</mat-error>
+          }
+        </mat-form-field>
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="managerUsername" />
+            @if (form.get('managerUsername')?.hasError('required') && form.get('managerUsername')?.touched) {
+              <mat-error>Required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="managerPassword" />
+            @if (form.get('managerPassword')?.invalid && form.get('managerPassword')?.touched) {
+              <mat-error>Min 6 characters</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" class="full-width submit-btn" [disabled]="loading">
+          @if (loading) { <mat-spinner diameter="20"></mat-spinner> }
+          @else { Add Restaurant }
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

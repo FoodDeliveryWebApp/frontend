@@ -1,0 +1,4 @@
+.form-card { max-width: 540px; }
+.full-width { width: 100%; }
+form { display: flex; flex-direction: column; gap: 4px; }
+.empty { color: #888; }

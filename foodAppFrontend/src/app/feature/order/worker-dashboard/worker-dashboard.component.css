@@ -1,0 +1,7 @@
+.order-card { margin-bottom: 16px; }
+.food-list { list-style: none; padding: 12px 0; margin: 0; }
+.food-list li { padding: 4px 0; color: #444; }
+.total { font-size: 16px; margin-top: 8px; }
+.note { color: #666; font-size: 14px; }
+.spinner-wrap { display: flex; justify-content: center; padding: 60px; }
+.empty { color: #888; text-align: center; padding: 40px; }

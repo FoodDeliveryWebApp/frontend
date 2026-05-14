@@ -1,0 +1,13 @@
+.app-card { margin-bottom: 16px; }
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 12px 0;
+  font-size: 14px;
+}
+.admin-comment { color: #666; font-size: 14px; margin-top: 8px; }
+.full-width { width: 100%; margin-top: 12px; }
+.confirm-actions { display: flex; gap: 8px; }
+.spinner-wrap { display: flex; justify-content: center; padding: 60px; }
+.empty { color: #888; }

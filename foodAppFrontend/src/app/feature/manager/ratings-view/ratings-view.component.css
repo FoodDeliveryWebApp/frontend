@@ -1,0 +1,9 @@
+.rating-card { margin-bottom: 16px; }
+.rating-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.stars { font-size: 18px; font-weight: 600; color: #f59e0b; }
+.date { color: #888; font-size: 14px; }
+.comment { color: #444; margin-bottom: 12px; }
+.full-width { width: 100%; }
+form { display: flex; flex-direction: column; gap: 8px; }
+.spinner-wrap { display: flex; justify-content: center; padding: 60px; }
+.empty { color: #888; }

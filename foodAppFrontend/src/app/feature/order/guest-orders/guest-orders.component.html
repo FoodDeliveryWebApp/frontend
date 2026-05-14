@@ -1,0 +1,37 @@
+<div class="page-container">
+  <h1 class="section-title">My Orders</h1>
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else if (orders.length === 0) {
+    <p class="empty">You have no orders yet.</p>
+  } @else {
+    @for (order of orders; track order.id) {
+      <mat-card class="order-card">
+        <mat-card-header>
+          <mat-card-title>Order #{{ order.id }}</mat-card-title>
+          <mat-card-subtitle>{{ order.orderTime | slice:0:10 }}</mat-card-subtitle>
+          <span [class]="'status-badge ' + statusClass(order.status)" style="margin-left: auto">
+            {{ order.status }}
+          </span>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-divider></mat-divider>
+          <ul class="food-list">
+            @for (food of order.foods; track food.id) {
+              <li>{{ food.name }} — {{ food.price | number:'1.2-2' }} RSD</li>
+            }
+          </ul>
+          <p class="total">Total: <strong>{{ order.totalPrice | number:'1.2-2' }} RSD</strong></p>
+          @if (order.note) {
+            <p class="note"><em>Note: {{ order.note }}</em></p>
+          }
+        </mat-card-content>
+        @if (order.status === 'Pending') {
+          <mat-card-actions>
+            <button mat-stroked-button color="warn" (click)="cancel(order.id)">Cancel Order</button>
+          </mat-card-actions>
+        }
+      </mat-card>
+    }
+  }
+</div>

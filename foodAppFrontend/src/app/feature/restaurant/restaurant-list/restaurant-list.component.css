@@ -1,0 +1,36 @@
+.search-field {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 24px;
+}
+
+.card-img {
+  height: 180px;
+  object-fit: cover;
+}
+
+.restaurant-card mat-card-content p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0;
+  color: #555;
+}
+
+.inline-icon {
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+}
+
+.spinner-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.empty {
+  color: #888;
+  text-align: center;
+  padding: 40px;
+}

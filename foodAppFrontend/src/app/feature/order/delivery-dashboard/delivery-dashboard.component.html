@@ -1,0 +1,41 @@
+<div class="page-container">
+  <h1 class="section-title">Deliveries</h1>
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else if (orders.length === 0) {
+    <p class="empty">No orders ready for delivery.</p>
+  } @else {
+    @for (order of orders; track order.id) {
+      <mat-card class="order-card">
+        <mat-card-header>
+          <mat-card-title>Order #{{ order.id }}</mat-card-title>
+          <mat-card-subtitle>{{ order.orderTime | slice:0:10 }}</mat-card-subtitle>
+          <span [class]="'status-badge ' + statusClass(order.status)" style="margin-left: auto">
+            {{ order.status }}
+          </span>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-divider></mat-divider>
+          <ul class="food-list">
+            @for (food of order.foods; track food.id) {
+              <li>{{ food.name }}</li>
+            }
+          </ul>
+          <p class="total">Total: <strong>{{ order.totalPrice | number:'1.2-2' }} RSD</strong></p>
+        </mat-card-content>
+        <mat-card-actions>
+          @if (order.status === 'Accepted') {
+            <button mat-raised-button color="primary" (click)="updateStatus(order.id, 'InDelivery')">
+              Pick Up
+            </button>
+          }
+          @if (order.status === 'InDelivery') {
+            <button mat-raised-button color="primary" (click)="updateStatus(order.id, 'Delivered')">
+              Mark Delivered
+            </button>
+          }
+        </mat-card-actions>
+      </mat-card>
+    }
+  }
+</div>

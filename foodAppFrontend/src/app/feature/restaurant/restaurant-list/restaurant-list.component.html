@@ -1,0 +1,38 @@
+<div class="page-container">
+  <h1 class="section-title">Restaurants</h1>
+
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search by name or cuisine</mat-label>
+    <input matInput [(ngModel)]="search" (ngModelChange)="onSearch()" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  @if (loading) {
+    <div class="spinner-wrap">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else if (filtered.length === 0) {
+    <p class="empty">No restaurants found.</p>
+  } @else {
+    <div class="card-grid">
+      @for (r of filtered; track r.id) {
+        <mat-card class="restaurant-card">
+          @if (r.imageUrl) {
+            <img mat-card-image [src]="r.imageUrl" [alt]="r.name" class="card-img" />
+          }
+          <mat-card-header>
+            <mat-card-title>{{ r.name }}</mat-card-title>
+            <mat-card-subtitle>{{ r.cuisine }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p><mat-icon class="inline-icon">location_on</mat-icon> {{ r.address }}</p>
+            <p><mat-icon class="inline-icon">phone</mat-icon> {{ r.phoneNumber }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <a mat-raised-button color="primary" [routerLink]="['/restaurant', r.id]">View Menu</a>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

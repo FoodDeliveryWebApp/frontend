@@ -1,0 +1,56 @@
+<div class="page-container">
+  <h1 class="section-title">Earnings</h1>
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else {
+    <mat-card class="summary-card">
+      <mat-card-content>
+        <p class="earnings-label">Total Earnings</p>
+        <p class="earnings-value">{{ totalEarnings | number:'1.2-2' }} RSD</p>
+      </mat-card-content>
+    </mat-card>
+
+    <h2>Orders ({{ orders.length }})</h2>
+    @if (orders.length === 0) {
+      <p class="empty">No orders found.</p>
+    } @else {
+      @for (order of orders; track order.id) {
+        <mat-card class="order-card">
+          <mat-card-content>
+            <div class="order-row">
+              <span class="order-id">Order #{{ order.id }}</span>
+              <span [class]="'status-badge ' + statusClass(order.status)">{{ order.status }}</span>
+              <span class="order-total">{{ order.totalPrice | number:'1.2-2' }} RSD</span>
+            </div>
+            <mat-divider></mat-divider>
+            <ul class="food-list">
+              @for (food of order.foods; track food.id) {
+                <li>{{ food.name }}</li>
+              }
+            </ul>
+            @if (order.note) {
+              <p class="note"><em>Note: {{ order.note }}</em></p>
+            }
+            @if (reportingOrderId !== order.id) {
+              <button mat-stroked-button color="warn" (click)="startReport(order.id)" style="margin-top: 8px">
+                Report Issue
+              </button>
+            } @else {
+              <form [formGroup]="reportForm" (ngSubmit)="submitReport()" style="margin-top: 12px">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Describe the issue</mat-label>
+                  <textarea matInput formControlName="comment" rows="2"></textarea>
+                  @if (reportForm.get('comment')?.hasError('required') && reportForm.get('comment')?.touched) {
+                    <mat-error>Required</mat-error>
+                  }
+                </mat-form-field>
+                <button mat-raised-button color="warn" type="submit">Submit Report</button>
+                <button mat-button type="button" (click)="reportingOrderId = null">Cancel</button>
+              </form>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+    }
+  }
+</div>

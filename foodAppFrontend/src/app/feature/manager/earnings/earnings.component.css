@@ -1,0 +1,22 @@
+.summary-card {
+  max-width: 300px;
+  margin-bottom: 24px;
+  background: #3f51b5;
+  color: white;
+}
+
+.earnings-label { font-size: 14px; opacity: 0.8; margin: 0; }
+.earnings-value { font-size: 36px; font-weight: 700; margin: 4px 0 0; }
+
+.order-card { margin-bottom: 12px; }
+.order-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+.order-total { margin-left: auto; font-weight: 600; }
+.food-list { list-style: none; padding: 8px 0 0; margin: 0; }
+.food-list li { color: #555; font-size: 14px; padding: 2px 0; }
+.spinner-wrap { display: flex; justify-content: center; padding: 60px; }
+.empty { color: #888; }

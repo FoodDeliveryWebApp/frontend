@@ -1,0 +1,24 @@
+<div class="page-container">
+  <h1 class="section-title">Customer Ratings</h1>
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else if (ratings.length === 0) {
+    <p class="empty">No ratings yet.</p>
+  } @else {
+    <div class="summary">
+      Average rating: <strong>{{ averageRating() | number:'1.1-1' }} / 10</strong>
+      ({{ ratings.length }} review{{ ratings.length !== 1 ? 's' : '' }})
+    </div>
+    @for (rating of ratings; track rating.id) {
+      <mat-card class="rating-card">
+        <mat-card-content>
+          <div class="rating-header">
+            <span class="stars">★ {{ rating.rating }}/10</span>
+            <span class="date">{{ rating.createdAt | slice:0:10 }}</span>
+          </div>
+          <p class="comment">{{ rating.comment }}</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  }
+</div>

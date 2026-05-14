@@ -1,0 +1,109 @@
+<div class="page-container">
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else {
+    <div class="detail-layout">
+      <div class="menu-section">
+        @if (restaurant) {
+          <div class="restaurant-header">
+            <h1>{{ restaurant.name }}</h1>
+            <p class="subtitle">{{ restaurant.cuisine }} · {{ restaurant.address }}</p>
+          </div>
+        }
+        <mat-divider></mat-divider>
+        <h2>Menu</h2>
+        @if (foods.length === 0) {
+          <p class="empty">No items on the menu yet.</p>
+        } @else {
+          <div class="food-list">
+            @for (food of foods; track food.id) {
+              <mat-card class="food-card">
+                @if (food.imageUrl) {
+                  <img mat-card-image [src]="food.imageUrl" [alt]="food.name" class="food-img" />
+                }
+                <mat-card-header>
+                  <mat-card-title>{{ food.name }}</mat-card-title>
+                  <mat-card-subtitle>{{ food.description }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p class="price">{{ food.price | number:'1.2-2' }} RSD</p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button color="primary" (click)="addToCart(food)">
+                    <mat-icon>add_shopping_cart</mat-icon> Add
+                    @if (cartCount(food.id) > 0) { ({{ cartCount(food.id) }}) }
+                  </button>
+                </mat-card-actions>
+              </mat-card>
+            }
+          </div>
+        }
+
+        @if (isGuest) {
+          <mat-divider style="margin: 24px 0"></mat-divider>
+          @if (!showRatingForm) {
+            <button mat-stroked-button color="primary" (click)="showRatingForm = true">
+              <mat-icon>star</mat-icon> Rate this Restaurant
+            </button>
+          } @else {
+            <mat-card class="rating-form">
+              <mat-card-header><mat-card-title>Leave a Rating</mat-card-title></mat-card-header>
+              <mat-card-content>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Rating (1–10)</mat-label>
+                  <input matInput type="number" [(ngModel)]="ratingValue" min="1" max="10" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Comment</mat-label>
+                  <textarea matInput [(ngModel)]="ratingComment" rows="3"></textarea>
+                </mat-form-field>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="submitRating()">Submit</button>
+                <button mat-button (click)="showRatingForm = false">Cancel</button>
+              </mat-card-actions>
+            </mat-card>
+          }
+        }
+      </div>
+
+      <aside class="cart-section">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>shopping_cart</mat-icon> Cart
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if (cart.length === 0) {
+              <p class="empty-cart">Your cart is empty</p>
+            } @else {
+              @for (item of cart; track $index) {
+                <div class="cart-item">
+                  <span>{{ item.name }}</span>
+                  <span>{{ item.price | number:'1.2-2' }}</span>
+                  <button mat-icon-button color="warn" (click)="removeFromCart($index)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              }
+              <mat-divider></mat-divider>
+              <p class="cart-total">Total: <strong>{{ cartTotal | number:'1.2-2' }} RSD</strong></p>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Note (optional)</mat-label>
+                <textarea matInput [(ngModel)]="orderNote" rows="2"></textarea>
+              </mat-form-field>
+            }
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" class="full-width"
+              (click)="placeOrder()" [disabled]="cart.length === 0 || ordering">
+              @if (ordering) { <mat-spinner diameter="20"></mat-spinner> }
+              @else { Place Order }
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </aside>
+    </div>
+  }
+</div>

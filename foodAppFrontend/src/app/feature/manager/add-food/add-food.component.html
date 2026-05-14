@@ -1,0 +1,45 @@
+<div class="page-container">
+  <h1 class="section-title">Add Food Item</h1>
+  @if (!restaurantId) {
+    <p class="empty">Could not determine your restaurant.</p>
+  } @else {
+    <mat-card class="form-card">
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
+            @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+              <mat-error>Required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Price (RSD)</mat-label>
+            <input matInput type="number" formControlName="price" />
+            @if (form.get('price')?.invalid && form.get('price')?.touched) {
+              <mat-error>Valid price required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" rows="3"></textarea>
+            @if (form.get('description')?.hasError('required') && form.get('description')?.touched) {
+              <mat-error>Required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Image URL</mat-label>
+            <input matInput formControlName="imageUrl" />
+            @if (form.get('imageUrl')?.hasError('required') && form.get('imageUrl')?.touched) {
+              <mat-error>Required</mat-error>
+            }
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="loading">
+            @if (loading) { <mat-spinner diameter="20"></mat-spinner> }
+            @else { Add Food Item }
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

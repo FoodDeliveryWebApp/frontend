@@ -1,0 +1,38 @@
+<div class="page-container">
+  <h1 class="section-title">Orders — Worker Dashboard</h1>
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else if (orders.length === 0) {
+    <p class="empty">No orders assigned to you.</p>
+  } @else {
+    @for (order of orders; track order.id) {
+      <mat-card class="order-card">
+        <mat-card-header>
+          <mat-card-title>Order #{{ order.id }}</mat-card-title>
+          <mat-card-subtitle>{{ order.orderTime | slice:0:10 }}</mat-card-subtitle>
+          <span [class]="'status-badge ' + statusClass(order.status)" style="margin-left: auto">
+            {{ order.status }}
+          </span>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-divider></mat-divider>
+          <ul class="food-list">
+            @for (food of order.foods; track food.id) {
+              <li>{{ food.name }} — {{ food.price | number:'1.2-2' }} RSD</li>
+            }
+          </ul>
+          <p class="total">Total: <strong>{{ order.totalPrice | number:'1.2-2' }} RSD</strong></p>
+          @if (order.note) {
+            <p class="note"><em>Note: {{ order.note }}</em></p>
+          }
+        </mat-card-content>
+        @if (order.status === 'Pending') {
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="updateStatus(order.id, 'Accepted')">Accept</button>
+            <button mat-raised-button color="warn" (click)="updateStatus(order.id, 'Rejected')">Reject</button>
+          </mat-card-actions>
+        }
+      </mat-card>
+    }
+  }
+</div>

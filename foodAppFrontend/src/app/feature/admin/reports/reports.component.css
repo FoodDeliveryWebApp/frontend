@@ -1,0 +1,5 @@
+.report-card { margin-bottom: 16px; }
+.comment { padding: 12px 0; color: #444; }
+.meta { font-size: 13px; color: #888; margin: 0; }
+.spinner-wrap { display: flex; justify-content: center; padding: 60px; }
+.empty { color: #888; }

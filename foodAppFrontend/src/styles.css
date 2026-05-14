@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #f5f5f5;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-pending   { background: #fff3cd; color: #856404; }
+.status-accepted  { background: #d1e7dd; color: #0f5132; }
+.status-rejected  { background: #f8d7da; color: #842029; }
+.status-preparing { background: #cff4fc; color: #055160; }
+.status-indelivery{ background: #d0d3f5; color: #1a1f8c; }
+.status-delivered { background: #d1e7dd; color: #0f5132; }
+.status-canceled  { background: #e2e3e5; color: #41464b; }
+.status-pickup    { background: #fff3cd; color: #856404; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+mat-card {
+  border-radius: 8px !important;
+}
