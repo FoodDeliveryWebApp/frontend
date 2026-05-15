@@ -1,5 +1,39 @@
-.form-card { max-width: 640px; }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-card {
+  max-width: 660px;
+  border-radius: 16px !important;
+}
+
+.form-card mat-card-content {
+  padding: 28px !important;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
 .full-width { width: 100%; }
-form { display: flex; flex-direction: column; gap: 4px; }
-.submit-btn { margin-top: 12px; height: 44px; }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+form h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 8px 0 12px;
+}
+
+.submit-btn {
+  margin-top: 12px !important;
+  height: 46px !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 480px) {
+  .row { grid-template-columns: 1fr; }
+}

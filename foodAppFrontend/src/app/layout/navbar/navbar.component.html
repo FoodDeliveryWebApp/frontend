@@ -1,47 +1,55 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="navbar">
   <a routerLink="/home" class="brand">
-    <mat-icon>restaurant</mat-icon>
-    <span>FoodApp</span>
+    <div class="brand-mark">
+      <mat-icon>restaurant</mat-icon>
+    </div>
+    <span class="brand-name">FoodApp</span>
   </a>
 
   <span class="spacer"></span>
 
-  @if (isLoggedIn) {
-    @if (role === 'guest') {
-      <a mat-button routerLink="/home">Restaurants</a>
-      <a mat-button routerLink="/my-orders">My Orders</a>
-    }
-    @if (role === 'worker') {
-      <a mat-button routerLink="/worker">Orders</a>
-    }
-    @if (role === 'deliveryman') {
-      <a mat-button routerLink="/delivery">Deliveries</a>
-    }
-    @if (role === 'manager') {
-      <a mat-button routerLink="/manager">Dashboard</a>
-      <a mat-button routerLink="/manager/add-worker">Add Worker</a>
-      <a mat-button routerLink="/manager/add-food">Add Food</a>
-      <a mat-button routerLink="/manager/earnings">Earnings</a>
-      <a mat-button routerLink="/manager/ratings">Ratings</a>
-    }
-    @if (role === 'administrator') {
-      <a mat-button routerLink="/admin">Dashboard</a>
-      <a mat-button routerLink="/admin/add-restaurant">Add Restaurant</a>
-      <a mat-button routerLink="/admin/applications">Applications</a>
-      <a mat-button routerLink="/admin/reports">Reports</a>
-    }
-    <button mat-button [matMenuTriggerFor]="userMenu">
-      <mat-icon>account_circle</mat-icon>
-      {{ user.username }}
-    </button>
-    <mat-menu #userMenu="matMenu">
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon> Logout
+  <nav class="nav-links">
+    @if (isLoggedIn) {
+      @if (role === 'guest') {
+        <a mat-button class="nav-btn" routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Restaurants</a>
+        <a mat-button class="nav-btn" routerLink="/my-orders" routerLinkActive="nav-active">My Orders</a>
+      }
+      @if (role === 'worker') {
+        <a mat-button class="nav-btn" routerLink="/worker" routerLinkActive="nav-active">Orders</a>
+      }
+      @if (role === 'deliveryman') {
+        <a mat-button class="nav-btn" routerLink="/delivery" routerLinkActive="nav-active">Deliveries</a>
+      }
+      @if (role === 'manager') {
+        <a mat-button class="nav-btn" routerLink="/manager" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
+        <a mat-button class="nav-btn" routerLink="/manager/add-worker" routerLinkActive="nav-active">Workers</a>
+        <a mat-button class="nav-btn" routerLink="/manager/add-food" routerLinkActive="nav-active">Menu</a>
+        <a mat-button class="nav-btn" routerLink="/manager/earnings" routerLinkActive="nav-active">Earnings</a>
+        <a mat-button class="nav-btn" routerLink="/manager/ratings" routerLinkActive="nav-active">Ratings</a>
+      }
+      @if (role === 'administrator') {
+        <a mat-button class="nav-btn" routerLink="/admin" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
+        <a mat-button class="nav-btn" routerLink="/admin/add-restaurant" routerLinkActive="nav-active">Restaurants</a>
+        <a mat-button class="nav-btn" routerLink="/admin/applications" routerLinkActive="nav-active">Applications</a>
+        <a mat-button class="nav-btn" routerLink="/admin/reports" routerLinkActive="nav-active">Reports</a>
+      }
+      <button mat-button class="user-menu-btn" [matMenuTriggerFor]="userMenu">
+        <span class="user-btn-inner">
+          <mat-icon>account_circle</mat-icon>
+          <span class="username">{{ user.username }}</span>
+          <mat-icon class="chevron">expand_more</mat-icon>
+        </span>
       </button>
-    </mat-menu>
-  } @else {
-    <a mat-button routerLink="/home">Restaurants</a>
-    <a mat-button routerLink="/login">Login</a>
-    <a mat-raised-button color="accent" routerLink="/register">Register</a>
-  }
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+    } @else {
+      <a mat-button class="nav-btn" routerLink="/home" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Restaurants</a>
+      <a mat-button class="nav-btn" routerLink="/login" routerLinkActive="nav-active">Login</a>
+      <a class="cta-btn" routerLink="/register">Get Started</a>
+    }
+  </nav>
 </mat-toolbar>

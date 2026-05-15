@@ -1,17 +1,165 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar {
+  background: #0f172a !important;
+  padding: 0 20px !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.05), 0 4px 16px rgba(0,0,0,.3) !important;
+  height: 64px !important;
+}
+
+/* ── Brand ───────────────────────────────── */
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: white;
+  gap: 10px;
   text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  background: #4f46e5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-mark mat-icon {
   font-size: 20px;
-  font-weight: 500;
-}
-
-.spacer {
-  flex: 1;
-}
-
-mat-toolbar a {
+  width: 20px;
+  height: 20px;
   color: white;
+}
+
+.brand-name {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: white;
+  white-space: nowrap;
+}
+
+/* ── Spacer ──────────────────────────────── */
+.spacer { flex: 1 1 auto; }
+
+/* ── Nav container ───────────────────────── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-links::-webkit-scrollbar { display: none; }
+
+/* ── Nav buttons — let Material control height, only override look ── */
+.nav-btn.mat-mdc-button {
+  color: rgba(255,255,255,.72) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  border-radius: 6px !important;
+  min-width: unset !important;
+  white-space: nowrap !important;
+  transition: color 0.15s ease, background-color 0.15s ease !important;
+}
+
+.nav-btn.mat-mdc-button:hover {
+  color: white !important;
+  background-color: rgba(255,255,255,.08) !important;
+}
+
+.nav-btn.nav-active.mat-mdc-button {
+  color: white !important;
+  background-color: rgba(255,255,255,.12) !important;
+}
+
+/* ── User menu button ────────────────────── */
+.user-menu-btn.mat-mdc-button {
+  color: rgba(255,255,255,.82) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
+  margin-left: 6px !important;
+  min-width: unset !important;
+  white-space: nowrap !important;
+  transition: color 0.15s ease, background-color 0.15s ease !important;
+}
+
+.user-menu-btn.mat-mdc-button:hover {
+  color: white !important;
+  background-color: rgba(255,255,255,.08) !important;
+}
+
+/* Inner flex wrapper handles icon+text+icon layout */
+.user-btn-inner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.user-btn-inner mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.username {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.chevron {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0;
+}
+
+/* ── CTA button (Get Started) ────────────── */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  background: #f97316;
+  color: white !important;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none !important;
+  margin-left: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.4;
+  transition: background-color 0.15s ease;
+}
+
+.cta-btn:hover {
+  background: #ea580c;
+  text-decoration: none !important;
+  color: white !important;
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 900px) {
+  .navbar { padding: 0 12px !important; }
+  .brand-name { display: none; }
+}
+
+@media (max-width: 600px) {
+  .username { display: none; }
+  .cta-btn  { padding: 8px 12px; }
 }

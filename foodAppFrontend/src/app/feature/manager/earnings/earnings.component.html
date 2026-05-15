@@ -1,16 +1,27 @@
 <div class="page-container">
   <h1 class="section-title">Earnings</h1>
+  <p class="section-subtitle">Overview of your restaurant's revenue and orders</p>
+
   @if (loading) {
     <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
   } @else {
-    <mat-card class="summary-card">
-      <mat-card-content>
-        <p class="earnings-label">Total Earnings</p>
-        <p class="earnings-value">{{ totalEarnings | number:'1.2-2' }} RSD</p>
-      </mat-card-content>
-    </mat-card>
+    <div class="stats-row">
+      <mat-card class="stat-card stat-primary">
+        <mat-card-content>
+          <p class="stat-label">Total Earnings</p>
+          <p class="stat-value">{{ totalEarnings | number:'1.2-2' }} <span class="stat-currency">RSD</span></p>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="stat-card stat-neutral">
+        <mat-card-content>
+          <p class="stat-label">Total Orders</p>
+          <p class="stat-value">{{ orders.length }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-    <h2>Orders ({{ orders.length }})</h2>
+    <h2 class="orders-heading">Order History</h2>
+
     @if (orders.length === 0) {
       <p class="empty">No orders found.</p>
     } @else {
@@ -32,11 +43,11 @@
               <p class="note"><em>Note: {{ order.note }}</em></p>
             }
             @if (reportingOrderId !== order.id) {
-              <button mat-stroked-button color="warn" (click)="startReport(order.id)" style="margin-top: 8px">
+              <button mat-stroked-button color="warn" (click)="startReport(order.id)" class="report-btn">
                 Report Issue
               </button>
             } @else {
-              <form [formGroup]="reportForm" (ngSubmit)="submitReport()" style="margin-top: 12px">
+              <form [formGroup]="reportForm" (ngSubmit)="submitReport()" class="report-form">
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Describe the issue</mat-label>
                   <textarea matInput formControlName="comment" rows="2"></textarea>
@@ -44,8 +55,10 @@
                     <mat-error>Required</mat-error>
                   }
                 </mat-form-field>
-                <button mat-raised-button color="warn" type="submit">Submit Report</button>
-                <button mat-button type="button" (click)="reportingOrderId = null">Cancel</button>
+                <div class="report-actions">
+                  <button mat-raised-button color="warn" type="submit">Submit Report</button>
+                  <button mat-button type="button" (click)="reportingOrderId = null">Cancel</button>
+                </div>
               </form>
             }
           </mat-card-content>

@@ -1,9 +1,15 @@
 <div class="auth-container">
+  <div class="auth-brand">
+    <div class="auth-logo">🍽️</div>
+    <p class="auth-app-name">FoodApp</p>
+  </div>
+
   <mat-card class="auth-card">
     <mat-card-header>
-      <mat-card-title>Create Account</mat-card-title>
+      <mat-card-title>Create an account</mat-card-title>
       <mat-card-subtitle>Join FoodApp today</mat-card-subtitle>
     </mat-card-header>
+
     <mat-card-content>
       <form [formGroup]="registrationForm" (ngSubmit)="register()">
         <div class="row">
@@ -55,7 +61,7 @@
         </mat-form-field>
 
         @if (errorMsg) {
-          <p class="error-msg">{{ errorMsg }}</p>
+          <div class="error-banner">{{ errorMsg }}</div>
         }
 
         <button mat-raised-button color="primary" type="submit" class="full-width submit-btn" [disabled]="loading">
@@ -67,8 +73,9 @@
         </button>
       </form>
     </mat-card-content>
-    <mat-card-actions align="end">
-      <span>Already have an account? <a routerLink="/login">Login</a></span>
-    </mat-card-actions>
+
+    <div class="auth-footer">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </div>
   </mat-card>
 </div>

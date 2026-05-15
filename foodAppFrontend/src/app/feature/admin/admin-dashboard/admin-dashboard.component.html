@@ -1,25 +1,37 @@
 <div class="page-container">
-  <h1 class="section-title">Admin Dashboard</h1>
+  <div class="dash-header">
+    <h1 class="section-title">Admin Dashboard</h1>
+    <p class="section-subtitle">Manage the platform</p>
+  </div>
+
   <div class="action-grid">
     <mat-card class="action-card" routerLink="/admin/add-restaurant">
       <mat-card-content>
-        <mat-icon class="action-icon">add_business</mat-icon>
+        <div class="action-icon-wrap icon-indigo">
+          <mat-icon>add_business</mat-icon>
+        </div>
         <h3>Add Restaurant</h3>
-        <p>Directly add a new restaurant</p>
+        <p>Directly add a new restaurant to the platform</p>
       </mat-card-content>
     </mat-card>
+
     <mat-card class="action-card" routerLink="/admin/applications">
       <mat-card-content>
-        <mat-icon class="action-icon">approval</mat-icon>
+        <div class="action-icon-wrap icon-orange">
+          <mat-icon>approval</mat-icon>
+        </div>
         <h3>Applications</h3>
-        <p>Review and approve/reject restaurant applications</p>
+        <p>Review and approve or reject restaurant applications</p>
       </mat-card-content>
     </mat-card>
+
     <mat-card class="action-card" routerLink="/admin/reports">
       <mat-card-content>
-        <mat-icon class="action-icon">flag</mat-icon>
+        <div class="action-icon-wrap icon-red">
+          <mat-icon>flag</mat-icon>
+        </div>
         <h3>Rating Reports</h3>
-        <p>Process reports from restaurant managers</p>
+        <p>Process reports submitted by restaurant managers</p>
       </mat-card-content>
     </mat-card>
   </div>

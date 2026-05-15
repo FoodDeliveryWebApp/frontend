@@ -1,4 +1,22 @@
-.form-card { max-width: 540px; }
+.form-card {
+  max-width: 540px;
+  border-radius: 16px !important;
+}
+
+.form-card mat-card-content {
+  padding: 24px !important;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .full-width { width: 100%; }
-form { display: flex; flex-direction: column; gap: 4px; }
-.empty { color: #888; }
+
+.empty {
+  color: #94a3b8;
+  padding: 24px 0;
+  font-size: 15px;
+}

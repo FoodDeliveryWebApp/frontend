@@ -1,6 +1,30 @@
-.order-card { margin-bottom: 16px; }
-.food-list { list-style: none; padding: 12px 0; margin: 0; }
-.food-list li { padding: 4px 0; color: #444; }
-.total { font-size: 16px; margin-top: 8px; }
-.spinner-wrap { display: flex; justify-content: center; padding: 60px; }
-.empty { color: #888; text-align: center; padding: 40px; }
+.order-card { margin-bottom: 18px; }
+.order-card:last-child { margin-bottom: 0; }
+
+.food-list {
+  list-style: none;
+  padding: 10px 0 6px;
+  margin: 0;
+}
+
+.food-list li {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 14px;
+  color: #475569;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.food-list li:last-child { border-bottom: none; }
+
+.total {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  padding: 10px 0 4px;
+  margin: 0;
+}
+
+.spinner-wrap { display: flex; justify-content: center; padding: 80px 0; }
+.empty { color: #94a3b8; text-align: center; padding: 64px 24px; font-size: 15px; }
