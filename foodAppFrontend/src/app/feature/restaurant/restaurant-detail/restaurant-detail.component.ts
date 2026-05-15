@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DecimalPipe } from '@angular/common';
+import { environment } from 'src/env/environment';
 import { RestaurantService } from '../services/restaurant.service';
 import { OrderService } from '../../order/services/order.service';
 import { RatingService } from '../../rating/services/rating.service';
@@ -48,6 +49,12 @@ export class RestaurantDetailComponent implements OnInit {
     private authService: AuthService,
     private snackBar: MatSnackBar
   ) {}
+
+  private backendHost = environment.apiHost.replace('api/', '');
+
+  getImageUrl(path: string): string {
+    return this.backendHost + path;
+  }
 
   get restaurantId(): number {
     return +this.route.snapshot.paramMap.get('id')!;

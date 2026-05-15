@@ -19,7 +19,7 @@
             @for (food of foods; track food.id) {
               <mat-card class="food-card">
                 @if (food.imageUrl) {
-                  <img mat-card-image [src]="food.imageUrl" [alt]="food.name" class="food-img" />
+                  <img mat-card-image [src]="getImageUrl(food.imageUrl)" [alt]="food.name" class="food-img" />
                 }
                 <mat-card-header>
                   <mat-card-title>{{ food.name }}</mat-card-title>

@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RestaurantService } from '../services/restaurant.service';
 import { Restaurant } from '../model/restaurant.model';
+import { environment } from 'src/env/environment';
 
 @Component({
   selector: 'app-restaurant-list',
@@ -23,7 +24,13 @@ export class RestaurantListComponent implements OnInit {
   search = '';
   loading = true;
 
+  private backendHost = environment.apiHost.replace('api/', '');
+
   constructor(private restaurantService: RestaurantService) {}
+
+  getImageUrl(path: string): string {
+    return this.backendHost + path;
+  }
 
   ngOnInit(): void {
     this.restaurantService.getAll().subscribe({
