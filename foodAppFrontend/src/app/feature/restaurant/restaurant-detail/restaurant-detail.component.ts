@@ -94,7 +94,7 @@ export class RestaurantDetailComponent implements OnInit {
     this.ordering = true;
     this.orderService.createOrder({
       userId: this.user.id,
-      foods: this.cart.map(f => ({ id: f.id })),
+      foods: this.cart,
       note: this.orderNote,
       status: 'Pending'
     }).subscribe({

@@ -12,7 +12,7 @@ export interface Order {
 
 export interface OrderCreate {
   userId: number;
-  foods: { id: number }[];
+  foods: Food[];
   note: string;
   status: string;
 }
