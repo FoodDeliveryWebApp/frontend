@@ -27,13 +27,30 @@
               <mat-error>Required</mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Image URL</mat-label>
-            <input matInput formControlName="imageUrl" />
-            @if (form.get('imageUrl')?.hasError('required') && form.get('imageUrl')?.touched) {
-              <mat-error>Required</mat-error>
+
+          <div class="image-upload-area">
+            <label class="upload-label">Food Image</label>
+            <input
+              #fileInput
+              type="file"
+              accept="image/*"
+              class="hidden-input"
+              (change)="onFileSelected($event)"
+            />
+            <button type="button" mat-stroked-button (click)="fileInput.click()">
+              <mat-icon>photo_camera</mat-icon>
+              {{ selectedFile ? 'Change Image' : 'Browse Image' }}
+            </button>
+            @if (selectedFile) {
+              <span class="file-name">{{ selectedFile.name }}</span>
             }
-          </mat-form-field>
+            @if (imagePreview) {
+              <div class="preview-wrap">
+                <img [src]="imagePreview" class="image-preview" alt="Preview" />
+              </div>
+            }
+          </div>
+
           <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="loading">
             @if (loading) { <mat-spinner diameter="20"></mat-spinner> }
             @else { Add Food Item }

@@ -37,6 +37,7 @@ export class RestaurantDetailComponent implements OnInit {
   showRatingForm = false;
   ratingValue = 5;
   ratingComment = '';
+  averageRating: number | null = null;
 
   ratings: RestaurantRating[] = [];
 
@@ -71,6 +72,10 @@ export class RestaurantDetailComponent implements OnInit {
     this.restaurantService.getFoodsByRestaurant(this.restaurantId).subscribe({
       next: (foods) => { this.foods = foods; this.loading = false; },
       error: () => { this.loading = false; }
+    });
+    this.ratingService.getAverageRating(this.restaurantId).subscribe({
+      next: (avg) => { this.averageRating = avg; },
+      error: () => {}
     });
   }
 

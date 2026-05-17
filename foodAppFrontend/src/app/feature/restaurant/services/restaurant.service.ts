@@ -27,6 +27,12 @@ export class RestaurantService {
     return this.http.post<void>(`${this.base}/${restaurantId}/foods`, food);
   }
 
+  uploadFoodImage(file: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return this.http.post(`${environment.apiHost}foods/upload-image`, formData, { responseType: 'text' });
+  }
+
   getFoodsByRestaurant(restaurantId: number): Observable<Food[]> {
     return this.http.get<Food[]>(`${environment.apiHost}foods/restaurant/${restaurantId}`);
   }

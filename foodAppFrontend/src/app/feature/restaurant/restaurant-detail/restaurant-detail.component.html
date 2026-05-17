@@ -8,6 +8,14 @@
           <div class="restaurant-header">
             <h1>{{ restaurant.name }}</h1>
             <p class="subtitle">{{ restaurant.cuisine }} · {{ restaurant.address }}</p>
+            <p class="avg-rating">
+              <mat-icon style="vertical-align:middle;font-size:18px;color:#f59e0b">star</mat-icon>
+              @if (averageRating !== null) {
+                <strong>{{ averageRating | number:'1.1-1' }} / 10</strong>
+              } @else {
+                <span style="color:#888">No ratings yet</span>
+              }
+            </p>
           </div>
         }
         <mat-divider></mat-divider>

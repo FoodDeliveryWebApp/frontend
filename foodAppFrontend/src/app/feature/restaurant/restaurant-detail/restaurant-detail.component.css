@@ -16,8 +16,17 @@
 
 .subtitle {
   color: #64748b;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
   font-size: 15px;
+}
+
+.avg-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 15px;
+  margin-bottom: 16px;
+  color: #1e293b;
 }
 
 /* Food grid */

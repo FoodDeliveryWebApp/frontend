@@ -20,6 +20,10 @@ export class RatingService {
     return this.http.get<RestaurantRating[]>(`${this.ratingsBase}/restaurant/${restaurantId}`);
   }
 
+  getAverageRating(restaurantId: number): Observable<number | null> {
+    return this.http.get<number | null>(`${this.ratingsBase}/restaurant/${restaurantId}/average`);
+  }
+
   createReport(report: RatingReport): Observable<RatingReport> {
     return this.http.post<RatingReport>(this.reportsBase, report);
   }
