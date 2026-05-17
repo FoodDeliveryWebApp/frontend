@@ -4,8 +4,12 @@
   } @else {
     <div class="dash-header">
       @if (restaurant) {
+        @if (restaurant.imageUrl) {
+          <img class="restaurant-hero-img" [src]="getImageUrl(restaurant.imageUrl)" [alt]="restaurant.name" />
+        }
         <h1 class="section-title">{{ restaurant.name }}</h1>
         <p class="section-subtitle">{{ restaurant.cuisine }} · {{ restaurant.address }}</p>
+        <p class="section-subtitle"><mat-icon class="inline-icon">phone</mat-icon> {{ restaurant.phoneNumber }}</p>
       } @else {
         <h1 class="section-title">Manager Dashboard</h1>
         <p class="section-subtitle">Manage your restaurant operations</p>
@@ -50,6 +54,26 @@
           </div>
           <h3>Ratings</h3>
           <p>View and manage customer ratings</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="action-card" routerLink="/manager/workers">
+        <mat-card-content>
+          <div class="action-icon-wrap icon-indigo">
+            <mat-icon>manage_accounts</mat-icon>
+          </div>
+          <h3>Manage Workers</h3>
+          <p>Edit or remove workers from your restaurant</p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="action-card" routerLink="/manager/foods">
+        <mat-card-content>
+          <div class="action-icon-wrap icon-orange">
+            <mat-icon>edit_note</mat-icon>
+          </div>
+          <h3>Manage Menu</h3>
+          <p>Edit or remove food items from the menu</p>
         </mat-card-content>
       </mat-card>
     </div>

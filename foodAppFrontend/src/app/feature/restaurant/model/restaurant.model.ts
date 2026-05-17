@@ -31,3 +31,13 @@ export interface WorkerCreate {
   surname: string;
   email: string;
 }
+
+export interface Worker {
+  id: number;
+  username: string;
+  isActive: boolean;
+  role: string;
+  name?: string;
+  surname?: string;
+  email?: string;
+}

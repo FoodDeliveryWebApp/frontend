@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ManagerService } from '../services/manager.service';
 import { Restaurant } from '../../restaurant/model/restaurant.model';
+import { environment } from 'src/env/environment';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -18,7 +19,13 @@ export class ManagerDashboardComponent implements OnInit {
   restaurant: Restaurant | null = null;
   loading = true;
 
+  private backendHost = environment.apiHost.replace('api/', '');
+
   constructor(private managerService: ManagerService) {}
+
+  getImageUrl(path: string): string {
+    return this.backendHost + path;
+  }
 
   ngOnInit(): void {
     this.managerService.getManagedRestaurant().subscribe({

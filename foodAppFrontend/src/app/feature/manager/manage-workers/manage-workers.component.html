@@ -1,0 +1,69 @@
+<div class="page-container">
+  <div class="page-header">
+    <a mat-icon-button routerLink="/manager"><mat-icon>arrow_back</mat-icon></a>
+    <h1 class="section-title">Manage Workers</h1>
+  </div>
+
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else if (workers.length === 0) {
+    <p class="empty">No workers assigned to your restaurant yet.</p>
+  } @else {
+    <div class="workers-list">
+      @for (worker of workers; track worker.id) {
+        <mat-card class="worker-card">
+          <mat-card-content>
+            @if (editingId !== worker.id) {
+              <div class="worker-info">
+                <div class="worker-avatar" [class.inactive]="!worker.isActive">
+                  <mat-icon>person</mat-icon>
+                </div>
+                <div class="worker-details">
+                  <span class="worker-name">{{ worker.name }} {{ worker.surname }}</span>
+                  <span class="worker-username">@{{ worker.username }}</span>
+                  <span class="worker-email">{{ worker.email }}</span>
+                </div>
+                <div class="worker-status" [class.active]="worker.isActive" [class.inactive]="!worker.isActive">
+                  {{ worker.isActive ? 'Active' : 'Inactive' }}
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="worker-actions">
+                <button mat-stroked-button color="primary" (click)="startEdit(worker)">
+                  <mat-icon>edit</mat-icon> Edit
+                </button>
+                <button mat-stroked-button color="warn" (click)="remove(worker)">
+                  <mat-icon>person_remove</mat-icon> Remove
+                </button>
+              </div>
+            } @else {
+              <form [formGroup]="editForm" class="edit-form">
+                <div class="edit-row">
+                  <mat-form-field appearance="outline" class="half">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="name" />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="half">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="surname" />
+                  </mat-form-field>
+                </div>
+                <mat-form-field appearance="outline" class="full">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" />
+                </mat-form-field>
+                <div class="toggle-row">
+                  <mat-slide-toggle formControlName="isActive" color="primary">Active</mat-slide-toggle>
+                </div>
+                <div class="edit-actions">
+                  <button mat-raised-button color="primary" type="button" (click)="saveEdit(worker)">Save</button>
+                  <button mat-stroked-button type="button" (click)="cancelEdit()">Cancel</button>
+                </div>
+              </form>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

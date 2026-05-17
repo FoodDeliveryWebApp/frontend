@@ -12,6 +12,8 @@ import { AddWorkerComponent } from './feature/manager/add-worker/add-worker.comp
 import { AddFoodComponent } from './feature/manager/add-food/add-food.component';
 import { EarningsComponent } from './feature/manager/earnings/earnings.component';
 import { RatingsViewComponent } from './feature/manager/ratings-view/ratings-view.component';
+import { ManageWorkersComponent } from './feature/manager/manage-workers/manage-workers.component';
+import { ManageFoodsComponent } from './feature/manager/manage-foods/manage-foods.component';
 import { AdminDashboardComponent } from './feature/admin/admin-dashboard/admin-dashboard.component';
 import { AddRestaurantComponent } from './feature/admin/add-restaurant/add-restaurant.component';
 import { ApplicationsComponent } from './feature/admin/applications/applications.component';
@@ -33,6 +35,8 @@ export const routes: Routes = [
   { path: 'manager/add-food', component: AddFoodComponent, canActivate: [authGuard], data: { role: 'manager' } },
   { path: 'manager/earnings', component: EarningsComponent, canActivate: [authGuard], data: { role: 'manager' } },
   { path: 'manager/ratings', component: RatingsViewComponent, canActivate: [authGuard], data: { role: 'manager' } },
+  { path: 'manager/workers', component: ManageWorkersComponent, canActivate: [authGuard], data: { role: 'manager' } },
+  { path: 'manager/foods', component: ManageFoodsComponent, canActivate: [authGuard], data: { role: 'manager' } },
 
   { path: 'admin', component: AdminDashboardComponent, canActivate: [authGuard], data: { role: 'administrator' } },
   { path: 'admin/add-restaurant', component: AddRestaurantComponent, canActivate: [authGuard], data: { role: 'administrator' } },

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
-import { Restaurant, WorkerCreate } from '../model/restaurant.model';
+import { Restaurant, Worker, WorkerCreate } from '../model/restaurant.model';
 import { Food } from '../model/food.model';
+
 
 @Injectable({ providedIn: 'root' })
 export class RestaurantService {
@@ -35,5 +36,25 @@ export class RestaurantService {
 
   getFoodsByRestaurant(restaurantId: number): Observable<Food[]> {
     return this.http.get<Food[]>(`${environment.apiHost}foods/restaurant/${restaurantId}`);
+  }
+
+  getWorkers(restaurantId: number): Observable<Worker[]> {
+    return this.http.get<Worker[]>(`${this.base}/${restaurantId}/workers`);
+  }
+
+  removeWorker(restaurantId: number, workerId: number): Observable<void> {
+    return this.http.delete<void>(`${this.base}/${restaurantId}/workers/${workerId}`);
+  }
+
+  updateWorker(restaurantId: number, workerId: number, data: Partial<Worker>): Observable<void> {
+    return this.http.put<void>(`${this.base}/${restaurantId}/workers/${workerId}`, data);
+  }
+
+  updateFood(foodId: number, data: Food): Observable<void> {
+    return this.http.put<void>(`${environment.apiHost}foods/${foodId}`, data);
+  }
+
+  removeFood(foodId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiHost}foods/${foodId}`);
   }
 }
