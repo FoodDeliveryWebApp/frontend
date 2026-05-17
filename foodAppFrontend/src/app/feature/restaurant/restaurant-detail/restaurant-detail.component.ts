@@ -31,6 +31,8 @@ export class RestaurantDetailComponent implements OnInit {
   foods: Food[] = [];
   cart: Food[] = [];
   orderNote = '';
+  deliveryAddress = '';
+  phoneNumber = '';
   loading = true;
   ordering = false;
 
@@ -96,17 +98,29 @@ export class RestaurantDetailComponent implements OnInit {
       this.snackBar.open('Add items to cart first', 'Close', { duration: 2000 });
       return;
     }
+    if (!this.deliveryAddress.trim()) {
+      this.snackBar.open('Delivery address is required', 'Close', { duration: 2500 });
+      return;
+    }
+    if (!this.phoneNumber.trim()) {
+      this.snackBar.open('Phone number is required', 'Close', { duration: 2500 });
+      return;
+    }
     this.ordering = true;
     this.orderService.createOrder({
       userId: this.user.id,
       foods: this.cart,
       note: this.orderNote,
-      status: 'Pending'
+      status: 'Pending',
+      deliveryAddress: this.deliveryAddress.trim(),
+      phoneNumber: this.phoneNumber.trim()
     }).subscribe({
       next: () => {
         this.ordering = false;
         this.cart = [];
         this.orderNote = '';
+        this.deliveryAddress = '';
+        this.phoneNumber = '';
         this.snackBar.open('Order placed successfully!', 'Close', { duration: 3000 });
       },
       error: () => {

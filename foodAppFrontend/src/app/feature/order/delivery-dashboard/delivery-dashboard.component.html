@@ -16,6 +16,11 @@
         </mat-card-header>
         <mat-card-content>
           <mat-divider></mat-divider>
+          <div class="delivery-info">
+            <p><mat-icon class="info-icon">location_on</mat-icon> <strong>{{ order.deliveryAddress }}</strong></p>
+            <p><mat-icon class="info-icon">phone</mat-icon> {{ order.phoneNumber }}</p>
+          </div>
+          <mat-divider></mat-divider>
           <ul class="food-list">
             @for (food of order.foods; track food.id) {
               <li>{{ food.name }}</li>

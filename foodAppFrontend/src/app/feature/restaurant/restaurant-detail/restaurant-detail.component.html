@@ -98,6 +98,16 @@
               <mat-divider></mat-divider>
               <p class="cart-total">Total: <strong>{{ cartTotal | number:'1.2-2' }} RSD</strong></p>
               <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Delivery Address *</mat-label>
+                <input matInput [(ngModel)]="deliveryAddress" placeholder="Street, number, city" />
+                <mat-icon matSuffix>location_on</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Phone Number *</mat-label>
+                <input matInput [(ngModel)]="phoneNumber" placeholder="e.g. 060-123-4567" />
+                <mat-icon matSuffix>phone</mat-icon>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Note (optional)</mat-label>
                 <textarea matInput [(ngModel)]="orderNote" rows="2"></textarea>
               </mat-form-field>

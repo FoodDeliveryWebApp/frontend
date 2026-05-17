@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SlicePipe, DecimalPipe } from '@angular/common';
@@ -11,7 +12,7 @@ import { Order } from '../model/order.model';
 @Component({
   selector: 'app-delivery-dashboard',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatDividerModule, MatProgressSpinnerModule, SlicePipe, DecimalPipe],
+  imports: [MatCardModule, MatButtonModule, MatDividerModule, MatIconModule, MatProgressSpinnerModule, SlicePipe, DecimalPipe],
   templateUrl: './delivery-dashboard.component.html',
   styleUrl: './delivery-dashboard.component.css'
 })

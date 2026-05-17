@@ -8,6 +8,8 @@ export interface Order {
   status: string;
   totalPrice: number;
   note: string;
+  deliveryAddress: string;
+  phoneNumber: string;
 }
 
 export interface OrderCreate {
@@ -15,6 +17,8 @@ export interface OrderCreate {
   foods: Food[];
   note: string;
   status: string;
+  deliveryAddress: string;
+  phoneNumber: string;
 }
 
 export interface ManagerEarnings {
