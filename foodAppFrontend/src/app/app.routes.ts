@@ -20,6 +20,7 @@ import { ApplicationsComponent } from './feature/admin/applications/applications
 import { ReportsComponent } from './feature/admin/reports/reports.component';
 import { AddDeliveryManComponent } from './feature/admin/add-delivery-man/add-delivery-man.component';
 import { ManageDeliveryMenComponent } from './feature/admin/manage-delivery-men/manage-delivery-men.component';
+import { ManageRestaurantsComponent } from './feature/admin/manage-restaurants/manage-restaurants.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -46,6 +47,7 @@ export const routes: Routes = [
   { path: 'admin/reports', component: ReportsComponent, canActivate: [authGuard], data: { role: 'administrator' } },
   { path: 'admin/add-delivery-man', component: AddDeliveryManComponent, canActivate: [authGuard], data: { role: 'administrator' } },
   { path: 'admin/delivery-men', component: ManageDeliveryMenComponent, canActivate: [authGuard], data: { role: 'administrator' } },
+  { path: 'admin/restaurants', component: ManageRestaurantsComponent, canActivate: [authGuard], data: { role: 'administrator' } },
 
   { path: '**', redirectTo: 'home' }
 ];

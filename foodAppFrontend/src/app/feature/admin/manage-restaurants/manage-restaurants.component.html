@@ -1,0 +1,152 @@
+<div class="page-container">
+  <div class="page-header">
+    <a mat-icon-button routerLink="/admin"><mat-icon>arrow_back</mat-icon></a>
+    <h1 class="section-title">Manage Restaurants</h1>
+  </div>
+
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else if (restaurants.length === 0) {
+    <p class="empty">No restaurants found.</p>
+  } @else {
+    <div class="list">
+      @for (r of restaurants; track r.id) {
+        <mat-card class="rest-card">
+          <mat-card-content>
+            @if (editingId !== r.id) {
+              <div class="rest-info">
+                <img [src]="getImageUrl(r.imageUrl)" class="rest-thumb" alt="{{ r.name }}" />
+                <div class="rest-details">
+                  <span class="rest-name">{{ r.name }}</span>
+                  <span class="rest-meta">{{ r.address }}</span>
+                  <span class="rest-meta">{{ r.phoneNumber }} &middot; {{ r.cuisine }}</span>
+                  @if (r.manager) {
+                    <span class="rest-manager">Manager: {{ r.manager.name }} {{ r.manager.surname }} (@{{ r.manager.username }})</span>
+                  }
+                </div>
+                <div class="rest-status" [class.active]="r.isActive" [class.inactive]="!r.isActive">
+                  {{ r.isActive ? 'Active' : 'Inactive' }}
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="rest-actions">
+                <button mat-stroked-button color="primary" (click)="startEdit(r)">
+                  <mat-icon>edit</mat-icon> Edit
+                </button>
+                <button mat-stroked-button color="warn" (click)="remove(r)">
+                  <mat-icon>delete</mat-icon> Delete
+                </button>
+              </div>
+            } @else {
+              <form [formGroup]="editForm" class="edit-form">
+                <h4 class="section-label">Restaurant Info</h4>
+                <mat-form-field appearance="outline" class="full">
+                  <mat-label>Name</mat-label>
+                  <input matInput formControlName="name" />
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full">
+                  <mat-label>Address</mat-label>
+                  <input matInput formControlName="address" />
+                </mat-form-field>
+                <div class="edit-row">
+                  <mat-form-field appearance="outline" class="half">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phoneNumber" />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="half">
+                    <mat-label>Cuisine</mat-label>
+                    <mat-select formControlName="cuisine">
+                      @for (c of cuisines; track c) {
+                        <mat-option [value]="c">{{ c }}</mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="toggle-row">
+                  <mat-slide-toggle formControlName="isActive" color="primary">Active</mat-slide-toggle>
+                </div>
+
+                <div class="image-upload-wrap">
+                  <span class="upload-label">Change Image (optional)</span>
+                  <div class="upload-row">
+                    <button type="button" mat-stroked-button (click)="fileInput.click()">
+                      <mat-icon>photo_camera</mat-icon> Browse
+                    </button>
+                    @if (selectedFile) {
+                      <span class="file-name">{{ selectedFile.name }}</span>
+                    }
+                  </div>
+                  <input #fileInput type="file" accept="image/*" hidden (change)="onFileSelected($event)" />
+                  @if (imagePreview) {
+                    <img [src]="imagePreview" class="image-preview" alt="Preview" />
+                  }
+                </div>
+
+                <mat-divider style="margin: 12px 0"></mat-divider>
+                <h4 class="section-label">Manager Info</h4>
+                <div class="edit-row">
+                  <mat-form-field appearance="outline" class="half">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="managerName" />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="half">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="managerSurname" />
+                  </mat-form-field>
+                </div>
+                <mat-form-field appearance="outline" class="full">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="managerEmail" />
+                </mat-form-field>
+                <div class="toggle-row">
+                  <mat-slide-toggle formControlName="managerIsActive" color="primary">Manager Active</mat-slide-toggle>
+                </div>
+
+                <div class="replace-toggle">
+                  <mat-slide-toggle formControlName="replaceManager" color="warn">Replace Manager (create new account)</mat-slide-toggle>
+                </div>
+
+                @if (replaceManager) {
+                  <div class="new-manager-section">
+                    <div class="edit-row">
+                      <mat-form-field appearance="outline" class="half">
+                        <mat-label>New First Name</mat-label>
+                        <input matInput formControlName="newManagerName" />
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="half">
+                        <mat-label>New Last Name</mat-label>
+                        <input matInput formControlName="newManagerSurname" />
+                      </mat-form-field>
+                    </div>
+                    <mat-form-field appearance="outline" class="full">
+                      <mat-label>New Manager Email</mat-label>
+                      <input matInput formControlName="newManagerEmail" />
+                    </mat-form-field>
+                    <div class="edit-row">
+                      <mat-form-field appearance="outline" class="half">
+                        <mat-label>New Username</mat-label>
+                        <input matInput formControlName="newManagerUsername" />
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="half">
+                        <mat-label>New Password</mat-label>
+                        <input matInput type="password" formControlName="newManagerPassword" />
+                        @if (editForm.get('newManagerPassword')?.hasError('minlength') && editForm.get('newManagerPassword')?.touched) {
+                          <mat-error>Min 6 characters</mat-error>
+                        }
+                      </mat-form-field>
+                    </div>
+                  </div>
+                }
+
+                <div class="edit-actions">
+                  <button mat-raised-button color="primary" type="button" (click)="saveEdit(r)">Save</button>
+                  <button mat-stroked-button type="button" (click)="cancelEdit()">Cancel</button>
+                </div>
+              </form>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

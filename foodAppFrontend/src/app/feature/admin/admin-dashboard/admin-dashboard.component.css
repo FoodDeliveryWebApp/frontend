@@ -51,6 +51,8 @@
 .icon-green mat-icon  { color: #059669; }
 .icon-teal   { background: #ccfbf1; }
 .icon-teal mat-icon   { color: #0d9488; }
+.icon-purple { background: #ede9fe; }
+.icon-purple mat-icon { color: #7c3aed; }
 
 .action-card h3 {
   margin: 0 0 6px;

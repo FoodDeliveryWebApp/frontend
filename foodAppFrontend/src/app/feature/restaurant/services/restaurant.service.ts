@@ -20,6 +20,20 @@ export class RestaurantService {
     return this.http.post<Restaurant>(this.base, dto);
   }
 
+  uploadRestaurantImage(file: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return this.http.post(`${this.base}/upload-image`, formData, { responseType: 'text' });
+  }
+
+  updateRestaurant(id: number, dto: object): Observable<Restaurant> {
+    return this.http.put<Restaurant>(`${this.base}/${id}`, dto);
+  }
+
+  deleteRestaurant(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.base}/${id}`);
+  }
+
   addWorker(restaurantId: number, worker: WorkerCreate): Observable<void> {
     return this.http.post<void>(`${this.base}/${restaurantId}/workers`, worker);
   }

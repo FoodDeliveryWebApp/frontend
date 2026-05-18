@@ -6,7 +6,7 @@ export interface Restaurant {
   isActive: boolean;
   cuisine: string;
   imageUrl: string;
-  manager?: { username: string; role: string; isActive: boolean };
+  manager?: { id: number; username: string; role: string; isActive: boolean; name?: string; surname?: string; email?: string };
 }
 
 export interface RestaurantCreate {
