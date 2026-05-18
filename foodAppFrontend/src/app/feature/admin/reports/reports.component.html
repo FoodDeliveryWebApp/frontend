@@ -8,21 +8,38 @@
     @for (report of reports; track report.id) {
       <mat-card class="report-card">
         <mat-card-header>
-          <mat-card-title>Report #{{ report.id }}</mat-card-title>
-          <mat-card-subtitle>Order #{{ report.orderId }}</mat-card-subtitle>
-          <span [class]="'status-badge ' + statusClass(report.status)" style="margin-left: auto">
+          <mat-card-title>
+            <mat-icon style="vertical-align:middle;margin-right:6px;color:#d97706">flag</mat-icon>
+            Report #{{ report.id }}
+          </mat-card-title>
+          <mat-card-subtitle>Restaurant #{{ report.restaurantId }}</mat-card-subtitle>
+          <span [class]="'status-badge ' + statusClass(report.status)" style="margin-left:auto">
             {{ report.status }}
           </span>
         </mat-card-header>
         <mat-card-content>
-          <mat-divider></mat-divider>
-          <p class="comment">{{ report.comment }}</p>
+          <mat-divider style="margin: 8px 0 14px"></mat-divider>
+
+          <div class="rating-box">
+            <span class="stars">★ {{ report.ratingValue }}/10</span>
+            <p class="rating-comment">"{{ report.ratingComment }}"</p>
+          </div>
+
+          <div class="reason-box">
+            <strong>Manager's reason:</strong>
+            <p>{{ report.reason }}</p>
+          </div>
+
           <p class="meta">Filed: {{ report.createdAt | slice:0:10 }}</p>
         </mat-card-content>
         @if (report.status === 'Pending') {
           <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="updateStatus(report.id!, 'Approved')">Approve</button>
-            <button mat-stroked-button color="warn" (click)="updateStatus(report.id!, 'Rejected')">Reject</button>
+            <button mat-raised-button color="warn" (click)="updateStatus(report.id!, 'Approved')">
+              <mat-icon>delete_forever</mat-icon> Approve & Remove Rating
+            </button>
+            <button mat-stroked-button (click)="updateStatus(report.id!, 'Rejected')">
+              <mat-icon>close</mat-icon> Reject
+            </button>
           </mat-card-actions>
         }
       </mat-card>

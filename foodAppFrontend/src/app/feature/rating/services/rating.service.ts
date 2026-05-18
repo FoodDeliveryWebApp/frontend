@@ -12,8 +12,12 @@ export class RatingService {
 
   constructor(private http: HttpClient) {}
 
-  addRating(rating: RestaurantRating): Observable<void> {
-    return this.http.post<void>(this.ratingsBase, rating);
+  addRating(rating: RestaurantRating): Observable<RestaurantRating> {
+    return this.http.post<RestaurantRating>(this.ratingsBase, rating);
+  }
+
+  updateRating(id: number, rating: RestaurantRating): Observable<void> {
+    return this.http.put<void>(`${this.ratingsBase}/${id}`, rating);
   }
 
   getRatingsForRestaurant(restaurantId: number): Observable<RestaurantRating[]> {
@@ -30,6 +34,10 @@ export class RatingService {
 
   getAllReports(): Observable<RatingReport[]> {
     return this.http.get<RatingReport[]>(this.reportsBase);
+  }
+
+  getManagerReports(): Observable<RatingReport[]> {
+    return this.http.get<RatingReport[]>(`${this.reportsBase}/my`);
   }
 
   updateReportStatus(reportId: number, status: string): Observable<RatingReport> {

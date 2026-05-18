@@ -9,9 +9,12 @@ export interface RestaurantRating {
 
 export interface RatingReport {
   id?: number;
-  orderId: number;
-  managerId: number;
-  comment: string;
+  ratingId: number;
+  managerId?: number;
+  reason: string;
   status?: string;
   createdAt?: string;
+  ratingValue?: number;
+  ratingComment?: string;
+  restaurantId?: number;
 }

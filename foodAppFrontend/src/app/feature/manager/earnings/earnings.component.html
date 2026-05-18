@@ -42,25 +42,6 @@
             @if (order.note) {
               <p class="note"><em>Note: {{ order.note }}</em></p>
             }
-            @if (reportingOrderId !== order.id) {
-              <button mat-stroked-button color="warn" (click)="startReport(order.id)" class="report-btn">
-                Report Issue
-              </button>
-            } @else {
-              <form [formGroup]="reportForm" (ngSubmit)="submitReport()" class="report-form">
-                <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Describe the issue</mat-label>
-                  <textarea matInput formControlName="comment" rows="2"></textarea>
-                  @if (reportForm.get('comment')?.hasError('required') && reportForm.get('comment')?.touched) {
-                    <mat-error>Required</mat-error>
-                  }
-                </mat-form-field>
-                <div class="report-actions">
-                  <button mat-raised-button color="warn" type="submit">Submit Report</button>
-                  <button mat-button type="button" (click)="reportingOrderId = null">Cancel</button>
-                </div>
-              </form>
-            }
           </mat-card-content>
         </mat-card>
       }

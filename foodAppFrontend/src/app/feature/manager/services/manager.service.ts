@@ -12,7 +12,9 @@ export class ManagerService {
   constructor(
     private restaurantService: RestaurantService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.authService.user$.subscribe(() => { this.cachedRestaurant = null; });
+  }
 
   getManagedRestaurant(): Observable<Restaurant | null> {
     if (this.cachedRestaurant) return of(this.cachedRestaurant);

@@ -49,13 +49,30 @@
 
         @if (isGuest) {
           <mat-divider style="margin: 24px 0"></mat-divider>
-          @if (!showRatingForm) {
-            <button mat-stroked-button color="primary" (click)="showRatingForm = true">
-              <mat-icon>star</mat-icon> Rate this Restaurant
-            </button>
+          @if (!hasOrderedHere) {
+            <p style="color:#888;font-size:14px">
+              <mat-icon style="vertical-align:middle;font-size:18px">info</mat-icon>
+              You must order from this restaurant before you can leave a rating.
+            </p>
+          } @else if (!showRatingForm) {
+            @if (existingRating) {
+              <p style="color:#555;font-size:14px;margin-bottom:8px">
+                <mat-icon style="vertical-align:middle;font-size:18px;color:#f59e0b">star</mat-icon>
+                Your rating: <strong>{{ existingRating.rating }}/10</strong> — "{{ existingRating.comment }}"
+              </p>
+              <button mat-stroked-button color="primary" (click)="showRatingForm = true">
+                <mat-icon>edit</mat-icon> Update your Rating
+              </button>
+            } @else {
+              <button mat-stroked-button color="primary" (click)="showRatingForm = true">
+                <mat-icon>star</mat-icon> Rate this Restaurant
+              </button>
+            }
           } @else {
             <mat-card class="rating-form">
-              <mat-card-header><mat-card-title>Leave a Rating</mat-card-title></mat-card-header>
+              <mat-card-header>
+                <mat-card-title>{{ existingRating ? 'Update your Rating' : 'Leave a Rating' }}</mat-card-title>
+              </mat-card-header>
               <mat-card-content>
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Rating (1–10)</mat-label>
@@ -67,7 +84,9 @@
                 </mat-form-field>
               </mat-card-content>
               <mat-card-actions>
-                <button mat-raised-button color="primary" (click)="submitRating()">Submit</button>
+                <button mat-raised-button color="primary" (click)="submitRating()">
+                  {{ existingRating ? 'Update' : 'Submit' }}
+                </button>
                 <button mat-button (click)="showRatingForm = false">Cancel</button>
               </mat-card-actions>
             </mat-card>

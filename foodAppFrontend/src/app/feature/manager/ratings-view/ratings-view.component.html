@@ -1,15 +1,17 @@
 <div class="page-container">
   <h1 class="section-title">Customer Ratings</h1>
+
   @if (loading) {
     <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
   } @else if (ratings.length === 0) {
     <p class="empty">No ratings yet.</p>
   } @else {
     <div class="summary">
-      Average rating: <strong>{{ averageRating() | number:'1.1-1' }} / 10</strong>
-      ({{ ratings.length }} review{{ ratings.length !== 1 ? 's' : '' }})
+      Average: <strong>{{ averageRating() | number:'1.1-1' }} / 10</strong>
+      &nbsp;·&nbsp; {{ ratings.length }} review{{ ratings.length !== 1 ? 's' : '' }}
     </div>
-    @for (rating of ratings; track rating.id) {
+
+    @for (rating of ratings; track $index; let i = $index) {
       <mat-card class="rating-card">
         <mat-card-content>
           <div class="rating-header">
@@ -18,6 +20,47 @@
           </div>
           <p class="comment">{{ rating.comment }}</p>
         </mat-card-content>
+
+        <mat-card-actions class="card-actions">
+          @if (statusAt(i) === 'Pending') {
+            <span class="status-badge status-pending">
+              <mat-icon>hourglass_empty</mat-icon> Reported
+            </span>
+          } @else if (statusAt(i) === 'Approved') {
+            <span class="status-badge status-approved">
+              <mat-icon>check_circle</mat-icon> Accepted (Deleted)
+            </span>
+          } @else if (statusAt(i) === 'Rejected') {
+            <span class="status-badge status-rejected">
+              <mat-icon>cancel</mat-icon> Declined
+            </span>
+          } @else if (openIndex !== i) {
+            <button mat-stroked-button color="warn" (click)="openForm(i)">
+              <mat-icon>flag</mat-icon> Report
+            </button>
+          }
+        </mat-card-actions>
+
+        @if (openIndex === i) {
+          <mat-card-content class="report-form">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Reason for reporting</mat-label>
+              <textarea matInput [(ngModel)]="reportReason" rows="3"
+                placeholder="Explain why this rating should be removed..."></textarea>
+            </mat-form-field>
+            <div class="report-actions">
+              <button mat-raised-button color="warn"
+                (click)="submitReport(i)" [disabled]="submitting">
+                @if (submitting) {
+                  <mat-spinner diameter="18"></mat-spinner>
+                } @else {
+                  Submit Report
+                }
+              </button>
+              <button mat-button (click)="cancelForm()" [disabled]="submitting">Cancel</button>
+            </div>
+          </mat-card-content>
+        }
       </mat-card>
     }
   }

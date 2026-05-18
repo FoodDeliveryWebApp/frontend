@@ -51,5 +51,34 @@
 
 .full-width { width: 100%; }
 
+.card-actions { padding: 4px 16px 8px; }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+.status-badge mat-icon { font-size: 16px; width: 16px; height: 16px; }
+
+.status-pending  { color: #92400e; background: #fef3c7; }
+.status-approved { color: #065f46; background: #d1fae5; }
+.status-rejected { color: #991b1b; background: #fee2e2; }
+
+.report-form {
+  padding-top: 0;
+  border-top: 1px solid #f1f5f9;
+}
+
+.report-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+}
+
 .spinner-wrap { display: flex; justify-content: center; padding: 80px 0; }
 .empty { color: #94a3b8; text-align: center; padding: 64px 24px; font-size: 15px; }

@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DecimalPipe } from '@angular/common';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/env/environment';
 import { RestaurantService } from '../services/restaurant.service';
 import { OrderService } from '../../order/services/order.service';
@@ -42,6 +44,8 @@ export class RestaurantDetailComponent implements OnInit {
   averageRating: number | null = null;
 
   ratings: RestaurantRating[] = [];
+  existingRating: RestaurantRating | null = null;
+  hasOrderedHere = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -71,14 +75,38 @@ export class RestaurantDetailComponent implements OnInit {
     this.restaurantService.getAll().subscribe(list => {
       this.restaurant = list.find(r => r.id === this.restaurantId) ?? null;
     });
-    this.restaurantService.getFoodsByRestaurant(this.restaurantId).subscribe({
-      next: (foods) => { this.foods = foods; this.loading = false; },
-      error: () => { this.loading = false; }
-    });
     this.ratingService.getAverageRating(this.restaurantId).subscribe({
       next: (avg) => { this.averageRating = avg; },
       error: () => {}
     });
+
+    if (this.isGuest) {
+      forkJoin({
+        foods: this.restaurantService.getFoodsByRestaurant(this.restaurantId).pipe(catchError(() => of([] as Food[]))),
+        orders: this.orderService.getGuestOrders(this.user.id).pipe(catchError(() => of([]))),
+        ratings: this.ratingService.getRatingsForRestaurant(this.restaurantId).pipe(catchError(() => of([])))
+      }).subscribe({
+        next: ({ foods, orders, ratings }) => {
+          this.foods = foods;
+          this.loading = false;
+          const menuFoodIds = new Set(foods.map(f => f.id));
+          this.hasOrderedHere = orders
+            .filter(o => o.status?.toLowerCase() === 'delivered')
+            .some(o => o.foods.some(f => menuFoodIds.has(f.id) || f.restaurantId === this.restaurantId));
+          this.existingRating = ratings.find((r: RestaurantRating) => r.ratedByUserId === this.user.id) ?? null;
+          if (this.existingRating) {
+            this.ratingValue = this.existingRating.rating;
+            this.ratingComment = this.existingRating.comment;
+          }
+        },
+        error: () => { this.loading = false; }
+      });
+    } else {
+      this.restaurantService.getFoodsByRestaurant(this.restaurantId).subscribe({
+        next: (foods) => { this.foods = foods; this.loading = false; },
+        error: () => { this.loading = false; }
+      });
+    }
   }
 
   addToCart(food: Food): void { this.cart.push(food); }
@@ -131,19 +159,35 @@ export class RestaurantDetailComponent implements OnInit {
   }
 
   submitRating(): void {
-    const rating: RestaurantRating = {
+    const payload: RestaurantRating = {
       rating: this.ratingValue,
       comment: this.ratingComment,
       ratedByUserId: this.user.id,
       restaurantId: this.restaurantId
     };
-    this.ratingService.addRating(rating).subscribe({
-      next: () => {
-        this.showRatingForm = false;
-        this.ratingComment = '';
-        this.snackBar.open('Rating submitted!', 'Close', { duration: 3000 });
-      },
-      error: () => { this.snackBar.open('Failed to submit rating', 'Close', { duration: 3000 }); }
-    });
+
+    const isUpdate = !!this.existingRating;
+
+    if (isUpdate) {
+      this.ratingService.updateRating(this.existingRating!.id!, payload).subscribe({
+        next: () => {
+          this.showRatingForm = false;
+          this.existingRating = { ...this.existingRating!, ...payload };
+          this.ratingService.getAverageRating(this.restaurantId).subscribe(avg => { this.averageRating = avg; });
+          this.snackBar.open('Rating updated!', 'Close', { duration: 3000 });
+        },
+        error: () => { this.snackBar.open('Failed to update rating', 'Close', { duration: 3000 }); }
+      });
+    } else {
+      this.ratingService.addRating(payload).subscribe({
+        next: (created) => {
+          this.showRatingForm = false;
+          this.existingRating = created;
+          this.ratingService.getAverageRating(this.restaurantId).subscribe(avg => { this.averageRating = avg; });
+          this.snackBar.open('Rating submitted!', 'Close', { duration: 3000 });
+        },
+        error: () => { this.snackBar.open('Failed to submit rating', 'Close', { duration: 3000 }); }
+      });
+    }
   }
 }

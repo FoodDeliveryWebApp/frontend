@@ -30,7 +30,6 @@
       @if (role === 'administrator') {
         <a mat-button class="nav-btn" routerLink="/admin" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a>
         <a mat-button class="nav-btn" routerLink="/admin/add-restaurant" routerLinkActive="nav-active">Restaurants</a>
-        <a mat-button class="nav-btn" routerLink="/admin/applications" routerLinkActive="nav-active">Applications</a>
         <a mat-button class="nav-btn" routerLink="/admin/reports" routerLinkActive="nav-active">Reports</a>
       }
       <button mat-button class="user-menu-btn" [matMenuTriggerFor]="userMenu">

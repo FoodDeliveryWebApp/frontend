@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,7 +12,7 @@ import { RatingReport } from '../../rating/model/restaurant-rating.model';
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatDividerModule, MatProgressSpinnerModule, SlicePipe],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, MatDividerModule, MatProgressSpinnerModule, SlicePipe],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
@@ -33,7 +34,11 @@ export class ReportsComponent implements OnInit {
       next: (updated) => {
         const r = this.reports.find(x => x.id === reportId);
         if (r) r.status = updated.status;
-        this.snackBar.open(`Report ${status}`, 'Close', { duration: 2000 });
+        if (status === 'Approved') {
+          this.snackBar.open('Report approved — rating has been removed.', 'Close', { duration: 3000 });
+        } else {
+          this.snackBar.open('Report rejected.', 'Close', { duration: 2000 });
+        }
       },
       error: () => this.snackBar.open('Action failed', 'Close', { duration: 2000 })
     });
