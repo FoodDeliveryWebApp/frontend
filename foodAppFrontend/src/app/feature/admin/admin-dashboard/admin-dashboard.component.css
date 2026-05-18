@@ -47,6 +47,10 @@
 .icon-orange mat-icon { color: #ea580c; }
 .icon-red    { background: #fee2e2; }
 .icon-red mat-icon    { color: #dc2626; }
+.icon-green  { background: #d1fae5; }
+.icon-green mat-icon  { color: #059669; }
+.icon-teal   { background: #ccfbf1; }
+.icon-teal mat-icon   { color: #0d9488; }
 
 .action-card h3 {
   margin: 0 0 6px;

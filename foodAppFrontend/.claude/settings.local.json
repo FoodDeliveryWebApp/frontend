@@ -22,7 +22,15 @@
       "PowerShell(Stop-Process *)",
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\frontend\\\\frontend\\\\foodAppFrontend\\\\src\" -Recurse -File | Select-Object FullName | ForEach-Object { $_.FullName } | Sort-Object)",
       "Bash(findstr \"imports\")",
-      "Bash(python -c \"import sys,json; p=json.load\\(sys.stdin\\); deps={**p.get\\('dependencies',{}\\), **p.get\\('devDependencies',{}\\)}; [print\\(k,v\\) for k,v in deps.items\\(\\) if 'icon' in k.lower\\(\\) or 'font' in k.lower\\(\\) or 'roboto' in k.lower\\(\\) or 'material-i' in k.lower\\(\\)]\")"
+      "Bash(python -c \"import sys,json; p=json.load\\(sys.stdin\\); deps={**p.get\\('dependencies',{}\\), **p.get\\('devDependencies',{}\\)}; [print\\(k,v\\) for k,v in deps.items\\(\\) if 'icon' in k.lower\\(\\) or 'font' in k.lower\\(\\) or 'roboto' in k.lower\\(\\) or 'material-i' in k.lower\\(\\)]\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\" -Recurse -Filter \"*Controller*\")",
+      "Bash(xargs grep -l \"admin\\\\|Admin\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\" -Directory)",
+      "Bash(Format-List FullName)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\" -Directory | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\\\\src\" -Directory | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\\\\src\\\\Modules\" -Directory | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\\\\src\\\\Modules\\\\Stakeholders\" -Recurse -Directory | ForEach-Object { $_.FullName })"
     ]
   }
 }

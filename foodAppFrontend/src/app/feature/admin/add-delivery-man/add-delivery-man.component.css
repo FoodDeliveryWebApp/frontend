@@ -1,0 +1,35 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.page-header .section-title { margin: 0; }
+
+.form-card {
+  max-width: 540px;
+  border-radius: 16px !important;
+}
+
+.form-card mat-card-content {
+  padding: 24px !important;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.full-width { width: 100%; }
+
+@media (max-width: 480px) {
+  .row { grid-template-columns: 1fr; }
+}
