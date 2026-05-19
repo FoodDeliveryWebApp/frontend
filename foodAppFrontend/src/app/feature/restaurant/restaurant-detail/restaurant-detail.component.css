@@ -61,6 +61,21 @@
   letter-spacing: -0.02em;
 }
 
+.delivery-price {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #059669;
+  margin: 4px 0 0;
+}
+
+.delivery-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+
 /* Cart sidebar */
 .cart-section {
   position: sticky;

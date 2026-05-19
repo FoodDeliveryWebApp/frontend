@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
-import { Order, OrderCreate, ManagerEarnings } from '../model/order.model';
+import { Order, OrderCreate, ManagerEarnings, DeliveryManEarnings } from '../model/order.model';
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
@@ -25,6 +25,10 @@ export class OrderService {
 
   getDeliveryOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.base}/delivery`);
+  }
+
+  getDeliveryManOrders(deliveryManId: number): Observable<DeliveryManEarnings> {
+    return this.http.get<DeliveryManEarnings>(`${this.base}/deliveryman/${deliveryManId}`);
   }
 
   getManagerEarnings(managerId: number): Observable<ManagerEarnings> {

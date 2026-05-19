@@ -21,6 +21,13 @@
             }
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Delivery Price (RSD)</mat-label>
+            <input matInput type="number" formControlName="deliveryPrice" />
+            @if (form.get('deliveryPrice')?.invalid && form.get('deliveryPrice')?.touched) {
+              <mat-error>Valid delivery price required</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
             <mat-label>Description</mat-label>
             <textarea matInput formControlName="description" rows="3"></textarea>
             @if (form.get('description')?.hasError('required') && form.get('description')?.touched) {

@@ -7,6 +7,8 @@ export interface Order {
   orderTime: string;
   status: string;
   totalPrice: number;
+  deliveryPrice: number;
+  deliveryManId?: number;
   note: string;
   deliveryAddress: string;
   phoneNumber: string;
@@ -22,6 +24,11 @@ export interface OrderCreate {
 }
 
 export interface ManagerEarnings {
+  orders: Order[];
+  totalEarnings: number;
+}
+
+export interface DeliveryManEarnings {
   orders: Order[];
   totalEarnings: number;
 }

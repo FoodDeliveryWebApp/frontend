@@ -35,6 +35,7 @@
                 </mat-card-header>
                 <mat-card-content>
                   <p class="price">{{ food.price | number:'1.2-2' }} RSD</p>
+                  <p class="delivery-price"><mat-icon class="delivery-icon">directions_bike</mat-icon> Delivery: {{ food.deliveryPrice }} RSD</p>
                 </mat-card-content>
                 <mat-card-actions>
                   <button mat-raised-button color="primary" (click)="addToCart(food)">

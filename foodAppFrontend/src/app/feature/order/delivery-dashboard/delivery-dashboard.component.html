@@ -1,46 +1,132 @@
 <div class="page-container">
-  <h1 class="section-title">Deliveries</h1>
+  <div class="header-row">
+    <h1 class="section-title">Delivery Dashboard</h1>
+    <div class="earnings-chip">
+      <mat-icon>payments</mat-icon>
+      Earnings: <strong>{{ totalEarnings | number:'1.2-2' }} RSD</strong>
+    </div>
+  </div>
+
   @if (loading) {
     <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
-  } @else if (orders.length === 0) {
-    <p class="empty">No orders ready for delivery.</p>
   } @else {
-    @for (order of orders; track order.id) {
-      <mat-card class="order-card">
-        <mat-card-header>
-          <mat-card-title>Order #{{ order.id }}</mat-card-title>
-          <mat-card-subtitle>{{ order.orderTime | slice:0:10 }}</mat-card-subtitle>
-          <span [class]="'status-badge ' + statusClass(order.status)" style="margin-left: auto">
-            {{ order.status }}
-          </span>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-divider></mat-divider>
-          <div class="delivery-info">
-            <p><mat-icon class="info-icon">location_on</mat-icon> <strong>{{ order.deliveryAddress }}</strong></p>
-            <p><mat-icon class="info-icon">phone</mat-icon> {{ order.phoneNumber }}</p>
-          </div>
-          <mat-divider></mat-divider>
-          <ul class="food-list">
-            @for (food of order.foods; track food.id) {
-              <li>{{ food.name }}</li>
-            }
-          </ul>
-          <p class="total">Total: <strong>{{ order.totalPrice | number:'1.2-2' }} RSD</strong></p>
-        </mat-card-content>
-        <mat-card-actions>
-          @if (order.status === 'Accepted') {
-            <button mat-raised-button color="primary" (click)="updateStatus(order.id, 'InDelivery')">
-              Pick Up
-            </button>
+    <mat-tab-group>
+
+      <!-- AVAILABLE ORDERS -->
+      <mat-tab label="Available ({{ availableOrders.length }})">
+        @if (availableOrders.length === 0) {
+          <p class="empty">No orders available for delivery.</p>
+        } @else {
+          @for (order of availableOrders; track order.id) {
+            <mat-card class="order-card">
+              <mat-card-header>
+                <mat-card-title>Order #{{ order.id }}</mat-card-title>
+                <mat-card-subtitle>{{ order.orderTime | slice:0:10 }}</mat-card-subtitle>
+                <span [class]="'status-badge ' + statusClass(order.status)" style="margin-left:auto">
+                  {{ order.status }}
+                </span>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-divider></mat-divider>
+                <div class="delivery-info">
+                  <p><mat-icon class="info-icon">location_on</mat-icon> <strong>{{ order.deliveryAddress }}</strong></p>
+                  <p><mat-icon class="info-icon">phone</mat-icon> {{ order.phoneNumber }}</p>
+                </div>
+                <mat-divider></mat-divider>
+                <ul class="food-list">
+                  @for (food of order.foods; track food.id) {
+                    <li>{{ food.name }}</li>
+                  }
+                </ul>
+                <p class="total">Total: <strong>{{ order.totalPrice | number:'1.2-2' }} RSD</strong></p>
+                <p class="delivery-fee">Delivery fee: <strong>{{ order.deliveryPrice | number:'1.2-2' }} RSD</strong></p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="claim(order.id)">
+                  <mat-icon>directions_bike</mat-icon> Claim Order
+                </button>
+              </mat-card-actions>
+            </mat-card>
           }
-          @if (order.status === 'InDelivery') {
-            <button mat-raised-button color="primary" (click)="updateStatus(order.id, 'Delivered')">
-              Mark Delivered
-            </button>
+        }
+      </mat-tab>
+
+      <!-- MY ACTIVE ORDERS -->
+      <mat-tab label="My Orders ({{ myOrders.length }})">
+        @if (myOrders.length === 0) {
+          <p class="empty">No active deliveries.</p>
+        } @else {
+          @for (order of myOrders; track order.id) {
+            <mat-card class="order-card">
+              <mat-card-header>
+                <mat-card-title>Order #{{ order.id }}</mat-card-title>
+                <mat-card-subtitle>{{ order.orderTime | slice:0:10 }}</mat-card-subtitle>
+                <span [class]="'status-badge ' + statusClass(order.status)" style="margin-left:auto">
+                  {{ order.status }}
+                </span>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-divider></mat-divider>
+                <div class="delivery-info">
+                  <p><mat-icon class="info-icon">location_on</mat-icon> <strong>{{ order.deliveryAddress }}</strong></p>
+                  <p><mat-icon class="info-icon">phone</mat-icon> {{ order.phoneNumber }}</p>
+                </div>
+                <mat-divider></mat-divider>
+                <ul class="food-list">
+                  @for (food of order.foods; track food.id) {
+                    <li>{{ food.name }}</li>
+                  }
+                </ul>
+                <p class="total">Total: <strong>{{ order.totalPrice | number:'1.2-2' }} RSD</strong></p>
+                <p class="delivery-fee">Delivery fee: <strong>{{ order.deliveryPrice | number:'1.2-2' }} RSD</strong></p>
+              </mat-card-content>
+              <mat-card-actions>
+                @if (order.status === 'ToPickUp') {
+                  <button mat-raised-button color="accent" (click)="pickUp(order.id)">
+                    <mat-icon>inventory</mat-icon> Picked Up
+                  </button>
+                }
+                @if (order.status === 'InDelivery') {
+                  <button mat-raised-button color="primary" (click)="markDelivered(order.id)">
+                    <mat-icon>check_circle</mat-icon> Mark Delivered
+                  </button>
+                }
+              </mat-card-actions>
+            </mat-card>
           }
-        </mat-card-actions>
-      </mat-card>
-    }
+        }
+      </mat-tab>
+
+      <!-- DELIVERY HISTORY -->
+      <mat-tab label="History ({{ deliveredOrders.length }})">
+        @if (deliveredOrders.length === 0) {
+          <p class="empty">No delivered orders yet.</p>
+        } @else {
+          @for (order of deliveredOrders; track order.id) {
+            <mat-card class="order-card delivered-card">
+              <mat-card-header>
+                <mat-card-title>Order #{{ order.id }}</mat-card-title>
+                <mat-card-subtitle>{{ order.orderTime | slice:0:10 }}</mat-card-subtitle>
+                <span class="status-badge status-delivered" style="margin-left:auto">Delivered</span>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-divider></mat-divider>
+                <div class="delivery-info">
+                  <p><mat-icon class="info-icon">location_on</mat-icon> {{ order.deliveryAddress }}</p>
+                </div>
+                <mat-divider></mat-divider>
+                <ul class="food-list">
+                  @for (food of order.foods; track food.id) {
+                    <li>{{ food.name }}</li>
+                  }
+                </ul>
+                <p class="delivery-fee">Earned: <strong>{{ order.deliveryPrice | number:'1.2-2' }} RSD</strong></p>
+              </mat-card-content>
+            </mat-card>
+          }
+        }
+      </mat-tab>
+
+    </mat-tab-group>
   }
 </div>

@@ -30,7 +30,12 @@
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\" -Directory | ForEach-Object { $_.FullName })",
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\\\\src\" -Directory | ForEach-Object { $_.FullName })",
       "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\\\\src\\\\Modules\" -Directory | ForEach-Object { $_.Name })",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\\\\src\\\\Modules\\\\Stakeholders\" -Recurse -Directory | ForEach-Object { $_.FullName })"
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\\\\foodApp\\\\src\\\\Modules\\\\Stakeholders\" -Recurse -Directory | ForEach-Object { $_.FullName })",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\" -Recurse -Filter \"*.java\")",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "PowerShell(Test-Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\"; \\(Get-Item -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\" -ErrorAction SilentlyContinue | Get-ChildItem | Measure-Object\\).Count)",
+      "Bash(npx tsc *)",
+      "Bash(dotnet build *)"
     ]
   }
 }
