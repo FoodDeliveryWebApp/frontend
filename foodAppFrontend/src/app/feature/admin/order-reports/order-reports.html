@@ -1,0 +1,56 @@
+<div class="page-container">
+  <h1 class="section-title">Order Reports</h1>
+
+  @if (loading) {
+    <div class="spinner-wrap"><mat-spinner></mat-spinner></div>
+  } @else if (reports.length === 0) {
+    <p class="empty">No order reports yet.</p>
+  } @else {
+    @for (report of reports; track report.id) {
+      <mat-card class="report-card">
+        <mat-card-header>
+          <mat-card-title>Report #{{ report.id }} — Order #{{ report.orderId }}</mat-card-title>
+          <mat-card-subtitle>{{ report.createdAt | slice:0:10 }} · Guest #{{ report.guestId }}</mat-card-subtitle>
+          <span [class]="'status-badge status-' + statusClass(report.status)" style="margin-left:auto">
+            {{ report.status }}
+          </span>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-divider></mat-divider>
+          <div class="report-section">
+            <p class="section-label"><mat-icon class="label-icon">report_problem</mat-icon> Guest report</p>
+            <p class="report-text">{{ report.description }}</p>
+          </div>
+
+          @if (report.answer && answeringId !== report.id) {
+            <div class="answer-section">
+              <p class="section-label answer-label"><mat-icon class="label-icon">reply</mat-icon> Your reply</p>
+              <p class="answer-text">{{ report.answer }}</p>
+            </div>
+          }
+
+          @if (answeringId === report.id) {
+            <mat-divider style="margin: 10px 0"></mat-divider>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Reply to guest</mat-label>
+              <textarea matInput [(ngModel)]="answerText" rows="3"></textarea>
+            </mat-form-field>
+            <div class="answer-actions">
+              <button mat-raised-button color="primary" (click)="submitAnswer()" [disabled]="!answerText.trim() || submitting">
+                @if (submitting) { <mat-spinner diameter="18"></mat-spinner> } @else { Send Reply }
+              </button>
+              <button mat-button (click)="cancelAnswer()">Cancel</button>
+            </div>
+          }
+        </mat-card-content>
+        @if (answeringId !== report.id) {
+          <mat-card-actions>
+            <button mat-stroked-button color="primary" (click)="startAnswer(report.id, report.answer)">
+              <mat-icon>reply</mat-icon> {{ report.answer ? 'Edit Reply' : 'Reply' }}
+            </button>
+          </mat-card-actions>
+        }
+      </mat-card>
+    }
+  }
+</div>

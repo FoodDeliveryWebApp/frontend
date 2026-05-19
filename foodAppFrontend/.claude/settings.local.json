@@ -35,7 +35,8 @@
       "Bash(Select-Object -ExpandProperty FullName)",
       "PowerShell(Test-Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\"; \\(Get-Item -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\" -ErrorAction SilentlyContinue | Get-ChildItem | Measure-Object\\).Count)",
       "Bash(npx tsc *)",
-      "Bash(dotnet build *)"
+      "Bash(dotnet build *)",
+      "Bash(ng generate *)"
     ]
   }
 }

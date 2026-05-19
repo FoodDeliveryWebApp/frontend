@@ -25,12 +25,46 @@
           @if (order.note) {
             <p class="note"><em>Note: {{ order.note }}</em></p>
           }
+
+          @if (order.status === 'Delivered') {
+            @let report = reportForOrder(order.id);
+            @if (report) {
+              <mat-divider style="margin: 12px 0"></mat-divider>
+              <div class="report-block">
+                <p class="report-label"><mat-icon class="report-icon">report_problem</mat-icon> Your report:</p>
+                <p class="report-text">{{ report.description }}</p>
+                @if (report.answer) {
+                  <p class="answer-label"><mat-icon class="answer-icon">admin_panel_settings</mat-icon> Admin reply:</p>
+                  <p class="answer-text">{{ report.answer }}</p>
+                } @else {
+                  <p class="pending-text">Awaiting admin reply...</p>
+                }
+              </div>
+            } @else if (reportingOrderId === order.id) {
+              <mat-divider style="margin: 12px 0"></mat-divider>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Describe your issue</mat-label>
+                <textarea matInput [(ngModel)]="reportText" rows="3"></textarea>
+              </mat-form-field>
+              <div class="report-actions">
+                <button mat-raised-button color="warn" (click)="submitReport()" [disabled]="!reportText.trim() || submitting">
+                  @if (submitting) { <mat-spinner diameter="18"></mat-spinner> } @else { Submit Report }
+                </button>
+                <button mat-button (click)="cancelReport()">Cancel</button>
+              </div>
+            }
+          }
         </mat-card-content>
-        @if (order.status === 'Pending') {
-          <mat-card-actions>
+        <mat-card-actions>
+          @if (order.status === 'Pending') {
             <button mat-stroked-button color="warn" (click)="cancel(order.id)">Cancel Order</button>
-          </mat-card-actions>
-        }
+          }
+          @if (order.status === 'Delivered' && !reportForOrder(order.id) && reportingOrderId !== order.id) {
+            <button mat-stroked-button color="warn" (click)="startReport(order.id)">
+              <mat-icon>report_problem</mat-icon> Report Order
+            </button>
+          }
+        </mat-card-actions>
       </mat-card>
     }
   }
