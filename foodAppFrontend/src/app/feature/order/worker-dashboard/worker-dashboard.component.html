@@ -17,7 +17,7 @@
         <mat-card-content>
           <mat-divider></mat-divider>
           <ul class="food-list">
-            @for (food of order.foods; track food.id) {
+            @for (food of order.foods; track $index) {
               <li>{{ food.name }} — {{ food.price | number:'1.2-2' }} RSD</li>
             }
           </ul>

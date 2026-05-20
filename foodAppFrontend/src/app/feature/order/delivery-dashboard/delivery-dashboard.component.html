@@ -34,7 +34,7 @@
                 </div>
                 <mat-divider></mat-divider>
                 <ul class="food-list">
-                  @for (food of order.foods; track food.id) {
+                  @for (food of order.foods; track $index) {
                     <li>{{ food.name }}</li>
                   }
                 </ul>
@@ -73,7 +73,7 @@
                 </div>
                 <mat-divider></mat-divider>
                 <ul class="food-list">
-                  @for (food of order.foods; track food.id) {
+                  @for (food of order.foods; track $index) {
                     <li>{{ food.name }}</li>
                   }
                 </ul>
@@ -116,7 +116,7 @@
                 </div>
                 <mat-divider></mat-divider>
                 <ul class="food-list">
-                  @for (food of order.foods; track food.id) {
+                  @for (food of order.foods; track $index) {
                     <li>{{ food.name }}</li>
                   }
                 </ul>

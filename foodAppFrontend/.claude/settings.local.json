@@ -36,7 +36,9 @@
       "PowerShell(Test-Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\"; \\(Get-Item -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\" -ErrorAction SilentlyContinue | Get-ChildItem | Measure-Object\\).Count)",
       "Bash(npx tsc *)",
       "Bash(dotnet build *)",
-      "Bash(ng generate *)"
+      "Bash(ng generate *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Veljko\\\\Desktop\\\\diplomski\\\\backend\\\\backend\" -Recurse -Directory -Filter \"*order*\" -ErrorAction SilentlyContinue)",
+      "Bash(Get-ChildItem *)"
     ]
   }
 }

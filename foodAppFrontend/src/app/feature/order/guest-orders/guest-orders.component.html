@@ -17,11 +17,13 @@
         <mat-card-content>
           <mat-divider></mat-divider>
           <ul class="food-list">
-            @for (food of order.foods; track food.id) {
+            @for (food of order.foods; track $index) {
               <li>{{ food.name }} — {{ food.price | number:'1.2-2' }} RSD</li>
             }
           </ul>
-          <p class="total">Total: <strong>{{ order.totalPrice | number:'1.2-2' }} RSD</strong></p>
+          <p class="total">Foods: <strong>{{ order.totalPrice | number:'1.2-2' }} RSD</strong></p>
+          <p class="total">Delivery: <strong>{{ order.deliveryPrice | number:'1.2-2' }} RSD</strong></p>
+          <p class="total">Total: <strong>{{ order.totalPrice + order.deliveryPrice | number:'1.2-2' }} RSD</strong></p>
           @if (order.note) {
             <p class="note"><em>Note: {{ order.note }}</em></p>
           }
