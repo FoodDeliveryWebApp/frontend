@@ -32,7 +32,7 @@ form {
 form h3 {
   font-size: 16px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--clr-text);
   margin: 8px 0 12px;
 }
 
@@ -51,7 +51,7 @@ form h3 {
 
 .upload-label {
   font-size: 13px;
-  color: #475569;
+  color: var(--clr-text-muted);
   font-weight: 500;
 }
 
@@ -63,7 +63,7 @@ form h3 {
 
 .file-name {
   font-size: 13px;
-  color: #64748b;
+  color: var(--clr-text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,7 +75,7 @@ form h3 {
   max-height: 160px;
   object-fit: cover;
   border-radius: 10px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--clr-border);
 }
 
 @media (max-width: 480px) {

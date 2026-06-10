@@ -41,19 +41,19 @@
 .food-name {
   font-weight: 600;
   font-size: 15px;
-  color: #1e293b;
+  color: var(--clr-text);
 }
 
 .food-desc {
   font-size: 13px;
-  color: #64748b;
+  color: var(--clr-text-muted);
   line-height: 1.4;
 }
 
 .food-price {
   font-size: 14px;
   font-weight: 600;
-  color: #059669;
+  color: var(--clr-success);
 }
 
 .food-actions {
@@ -86,14 +86,14 @@
   gap: 6px;
   cursor: pointer;
   padding: 10px 14px;
-  border: 1px dashed #94a3b8;
+  border: 1px dashed var(--clr-border-strong);
   border-radius: 6px;
   font-size: 13px;
-  color: #475569;
-  transition: border-color 0.2s;
+  color: var(--clr-text-muted);
+  transition: border-color 0.2s, color 0.2s;
 }
 
-.upload-label:hover { border-color: #2563eb; color: #2563eb; }
+.upload-label:hover { border-color: var(--clr-primary); color: var(--clr-primary); }
 .upload-label mat-icon { font-size: 18px; width: 18px; height: 18px; }
 
 .preview-thumb {
@@ -110,4 +110,10 @@
 }
 
 .spinner-wrap { display: flex; justify-content: center; padding: 60px; }
-.empty { color: #64748b; font-size: 15px; }
+.empty { color: var(--clr-text-muted); font-size: 15px; }
+
+@media (max-width: 520px) {
+  .edit-row    { flex-direction: column; gap: 4px; }
+  .food-actions { flex-wrap: wrap; }
+  .edit-actions { flex-wrap: wrap; }
+}

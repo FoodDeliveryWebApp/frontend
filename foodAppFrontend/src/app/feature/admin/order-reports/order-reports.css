@@ -2,7 +2,7 @@
 .report-card:last-child { margin-bottom: 0; }
 .full-width { width: 100%; }
 .spinner-wrap { display: flex; justify-content: center; padding: 80px 0; }
-.empty { color: #94a3b8; text-align: center; padding: 64px 24px; font-size: 15px; }
+.empty { color: var(--clr-text-faint); text-align: center; padding: 64px 24px; font-size: 15px; }
 
 .report-section {
   padding: 12px 0 6px;
@@ -16,24 +16,24 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #c2410c;
+  color: #fb923c;
   margin: 0 0 6px;
 }
 
-.answer-label { color: #1d4ed8; }
+.answer-label { color: var(--clr-info); }
 
 .label-icon { font-size: 14px; width: 14px; height: 14px; }
 
 .report-text {
   font-size: 14px;
-  color: #1e293b;
+  color: var(--clr-text);
   margin: 0;
   line-height: 1.5;
 }
 
 .answer-section {
-  background: #eff6ff;
-  border-left: 3px solid #3b82f6;
+  background: rgba(56,189,248,0.07);
+  border-left: 3px solid var(--clr-info);
   border-radius: 4px;
   padding: 10px 14px;
   margin-top: 10px;
@@ -41,7 +41,7 @@
 
 .answer-text {
   font-size: 14px;
-  color: #1e40af;
+  color: var(--clr-info);
   margin: 0;
   line-height: 1.5;
 }
