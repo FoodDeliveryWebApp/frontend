@@ -8,14 +8,14 @@
   gap: 6px;
   margin: 4px 0;
   font-size: 14px;
-  color: #1e293b;
+  color: var(--clr-text);
 }
 
 .info-icon {
   font-size: 16px;
   width: 16px;
   height: 16px;
-  color: #2563eb;
+  color: var(--clr-info);
   flex-shrink: 0;
 }
 
@@ -33,8 +33,8 @@
   align-items: center;
   padding: 6px 0;
   font-size: 14px;
-  color: #475569;
-  border-bottom: 1px solid #f1f5f9;
+  color: var(--clr-text-muted);
+  border-bottom: 1px solid var(--clr-border-light);
 }
 
 .food-list li:last-child { border-bottom: none; }
@@ -42,13 +42,13 @@
 .total {
   font-size: 15px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--clr-text);
   padding: 10px 0 4px;
   margin: 0;
 }
 
 .spinner-wrap { display: flex; justify-content: center; padding: 80px 0; }
-.empty { color: #94a3b8; text-align: center; padding: 64px 24px; font-size: 15px; }
+.empty { color: var(--clr-text-faint); text-align: center; padding: 64px 24px; font-size: 15px; }
 
 .header-row {
   display: flex;
@@ -63,17 +63,18 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #ecfdf5;
-  color: #065f46;
-  border: 1px solid #6ee7b7;
+  background: rgba(16,185,129,0.12);
+  color: var(--clr-success);
+  border: 1px solid rgba(16,185,129,0.25);
   border-radius: 20px;
   padding: 6px 16px;
   font-size: 14px;
+  font-weight: 600;
 }
 
 .delivery-fee {
   font-size: 14px;
-  color: #059669;
+  color: var(--clr-success);
   padding: 2px 0 6px;
   margin: 0;
 }

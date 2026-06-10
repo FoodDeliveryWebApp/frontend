@@ -16,7 +16,7 @@ form {
 .full-width { width: 100%; }
 
 .empty {
-  color: #94a3b8;
+  color: var(--clr-text-faint);
   padding: 24px 0;
   font-size: 15px;
 }
@@ -30,7 +30,7 @@ form {
 
 .upload-label {
   font-size: 13px;
-  color: #64748b;
+  color: var(--clr-text-muted);
   font-weight: 500;
 }
 
@@ -40,7 +40,7 @@ form {
 
 .file-name {
   font-size: 13px;
-  color: #475569;
+  color: var(--clr-text-muted);
   word-break: break-all;
 }
 
@@ -53,5 +53,5 @@ form {
   max-height: 200px;
   border-radius: 8px;
   object-fit: cover;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--clr-border);
 }
