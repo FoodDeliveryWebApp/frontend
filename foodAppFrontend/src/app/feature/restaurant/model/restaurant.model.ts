@@ -6,6 +6,7 @@ export interface Restaurant {
   isActive: boolean;
   cuisine: string;
   imageUrl: string;
+  deliveryFee: number;
   manager?: { id: number; username: string; role: string; isActive: boolean; name?: string; surname?: string; email?: string };
 }
 

@@ -30,6 +30,10 @@ export class RestaurantService {
     return this.http.put<Restaurant>(`${this.base}/${id}`, dto);
   }
 
+  updateDeliveryFee(id: number, deliveryFee: number): Observable<void> {
+    return this.http.put<void>(`${this.base}/${id}/delivery-fee`, deliveryFee);
+  }
+
   deleteRestaurant(id: number): Observable<void> {
     return this.http.delete<void>(`${this.base}/${id}`);
   }

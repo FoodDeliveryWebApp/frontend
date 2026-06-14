@@ -42,6 +42,15 @@
           </mat-form-field>
         </div>
 
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Delivery Fee (RSD)</mat-label>
+          <input matInput type="number" formControlName="deliveryFee" />
+          <mat-icon matSuffix>directions_bike</mat-icon>
+          @if (form.get('deliveryFee')?.invalid && form.get('deliveryFee')?.touched) {
+            <mat-error>Valid delivery fee required (min 0)</mat-error>
+          }
+        </mat-form-field>
+
         <div class="image-upload-wrap">
           <label class="upload-label">Restaurant Image</label>
           <div class="upload-row">

@@ -2,7 +2,6 @@ export interface Food {
   id: number;
   name: string;
   price: number;
-  deliveryPrice: number;
   description: string;
   imageUrl: string;
   restaurantId: number;

@@ -47,7 +47,6 @@ export class ManageFoodsComponent implements OnInit {
   editForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     price: new FormControl<number | null>(null, [Validators.required, Validators.min(0.01)]),
-    deliveryPrice: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
     description: new FormControl('', [Validators.required])
   });
 
@@ -87,7 +86,6 @@ export class ManageFoodsComponent implements OnInit {
     this.editForm.setValue({
       name: food.name,
       price: food.price,
-      deliveryPrice: food.deliveryPrice,
       description: food.description
     });
   }
@@ -119,7 +117,6 @@ export class ManageFoodsComponent implements OnInit {
         ...food,
         name: v.name!,
         price: v.price!,
-        deliveryPrice: v.deliveryPrice!,
         description: v.description!,
         imageUrl
       };

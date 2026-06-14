@@ -81,6 +81,8 @@ export class RestaurantDetailComponent implements OnInit {
     if (!/^[0-9]$/.test(event.key)) event.preventDefault();
   }
   get cartTotal(): number { return this.cart.reduce((s, f) => s + f.price, 0); }
+  get deliveryFee(): number { return this.restaurant?.deliveryFee ?? 0; }
+  get grandTotal(): number { return this.cartTotal + this.deliveryFee; }
 
   ngOnInit(): void {
     this.restaurantService.getAll().subscribe(list => {

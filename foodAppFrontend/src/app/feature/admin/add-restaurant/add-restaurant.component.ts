@@ -31,6 +31,7 @@ export class AddRestaurantComponent {
     address: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
     cuisine: new FormControl('', [Validators.required]),
+    deliveryFee: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
     managerUsername: new FormControl('', [Validators.required]),
     managerPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
     managerName: new FormControl('', [Validators.required]),
@@ -65,6 +66,7 @@ export class AddRestaurantComponent {
         address: v.address,
         phoneNumber: v.phoneNumber,
         cuisine: v.cuisine,
+        deliveryFee: v.deliveryFee ?? 0,
         imageUrl,
         isActive: true,
         manager: {
