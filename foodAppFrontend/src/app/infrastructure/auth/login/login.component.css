@@ -49,8 +49,9 @@
 }
 
 .auth-logo {
-  font-size: 44px;
-  line-height: 1;
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
 }
 
 .auth-app-name {

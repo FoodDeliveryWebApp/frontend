@@ -123,9 +123,14 @@
                 <mat-icon matSuffix>location_on</mat-icon>
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Phone Number *</mat-label>
-                <input matInput [(ngModel)]="phoneNumber" placeholder="e.g. 060-123-4567" />
+                <mat-label>Phone Number</mat-label>
+                <input matInput type="tel" [formControl]="phoneCtrl"
+                       (keydown)="allowOnlyDigits($event)"
+                       placeholder="+381601234567" maxlength="15"/>
                 <mat-icon matSuffix>phone</mat-icon>
+                @if (phoneCtrl.hasError('required') && phoneCtrl.touched) {
+                  <mat-error>Phone number is required</mat-error>
+                }
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Note (optional)</mat-label>

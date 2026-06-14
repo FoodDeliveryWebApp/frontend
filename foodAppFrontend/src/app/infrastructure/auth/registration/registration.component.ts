@@ -21,14 +21,26 @@ export class RegistrationComponent {
   errorMsg: string | null = null;
 
   registrationForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    surname: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    name:     new FormControl('', [Validators.required]),
+    surname:  new FormControl('', [Validators.required]),
+    email:    new FormControl('', [Validators.required, Validators.email]),
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    phone:    new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^\+?[0-9]{7,15}$/),
+    ]),
   });
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  allowOnlyDigits(event: KeyboardEvent): void {
+    const nav = ['Backspace','Delete','Tab','Escape','Enter','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'];
+    if (nav.includes(event.key)) return;
+    if (event.ctrlKey || event.metaKey) return;
+    if (event.key === '+' && (event.target as HTMLInputElement).selectionStart === 0) return;
+    if (!/^[0-9]$/.test(event.key)) event.preventDefault();
+  }
 
   register(): void {
     if (!this.registrationForm.valid) {
@@ -44,6 +56,7 @@ export class RegistrationComponent {
       email: v.email!,
       username: v.username!,
       password: v.password!,
+      phone: v.phone!,
     };
     this.authService.register(registration).subscribe({
       next: () => {

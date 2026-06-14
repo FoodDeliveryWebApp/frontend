@@ -1,13 +1,13 @@
 <div class="auth-container">
   <div class="auth-brand">
-    <div class="auth-logo">🍽️</div>
-    <p class="auth-app-name">FoodApp</p>
+    <img class="auth-logo" src="logo.svg" alt="Scooti"/>
+    <p class="auth-app-name">Scooti</p>
   </div>
 
   <mat-card class="auth-card">
     <mat-card-header>
       <mat-card-title>Create an account</mat-card-title>
-      <mat-card-subtitle>Join FoodApp today</mat-card-subtitle>
+      <mat-card-subtitle>Join Scooti today</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -57,6 +57,19 @@
           }
           @if (registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched) {
             <mat-error>At least 6 characters</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Phone Number</mat-label>
+          <input matInput type="tel" formControlName="phone"
+                 (keydown)="allowOnlyDigits($event)"
+                 maxlength="15" placeholder="+381601234567"/>
+          @if (registrationForm.get('phone')?.hasError('required') && registrationForm.get('phone')?.touched) {
+            <mat-error>Phone number is required</mat-error>
+          }
+          @if (registrationForm.get('phone')?.hasError('pattern') && registrationForm.get('phone')?.touched) {
+            <mat-error>Digits only, 7–15 characters (+ prefix allowed)</mat-error>
           }
         </mat-form-field>
 
