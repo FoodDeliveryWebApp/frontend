@@ -60,6 +60,19 @@
           }
         </mat-form-field>
 
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Phone Number</mat-label>
+          <input matInput type="tel" formControlName="phone"
+                 (keydown)="allowOnlyDigits($event)"
+                 maxlength="15" placeholder="+381601234567"/>
+          @if (registrationForm.get('phone')?.hasError('required') && registrationForm.get('phone')?.touched) {
+            <mat-error>Phone number is required</mat-error>
+          }
+          @if (registrationForm.get('phone')?.hasError('pattern') && registrationForm.get('phone')?.touched) {
+            <mat-error>Digits only, 7–15 characters (+ prefix allowed)</mat-error>
+          }
+        </mat-form-field>
+
         @if (errorMsg) {
           <div class="error-banner">{{ errorMsg }}</div>
         }
