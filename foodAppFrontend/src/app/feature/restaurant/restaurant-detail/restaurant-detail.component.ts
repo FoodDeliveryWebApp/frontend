@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,7 +24,7 @@ import { RestaurantRating } from '../../rating/model/restaurant-rating.model';
 @Component({
   selector: 'app-restaurant-detail',
   standalone: true,
-  imports: [FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatDividerModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, DecimalPipe],
+  imports: [FormsModule, ReactiveFormsModule, MatCardModule, MatButtonModule, MatIconModule, MatDividerModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, DecimalPipe],
   templateUrl: './restaurant-detail.component.html',
   styleUrl: './restaurant-detail.component.css'
 })
@@ -34,7 +34,10 @@ export class RestaurantDetailComponent implements OnInit {
   cart: Food[] = [];
   orderNote = '';
   deliveryAddress = '';
-  phoneNumber = '';
+  phoneCtrl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^\+?[0-9]{7,15}$/),
+  ]);
   loading = true;
   ordering = false;
 
@@ -69,6 +72,14 @@ export class RestaurantDetailComponent implements OnInit {
 
   get user() { return this.authService.user$.getValue(); }
   get isGuest(): boolean { return this.user.role?.toLowerCase() === 'guest'; }
+
+  allowOnlyDigits(event: KeyboardEvent): void {
+    const nav = ['Backspace','Delete','Tab','Escape','Enter','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'];
+    if (nav.includes(event.key)) return;
+    if (event.ctrlKey || event.metaKey) return;
+    if (event.key === '+' && (event.target as HTMLInputElement).selectionStart === 0) return;
+    if (!/^[0-9]$/.test(event.key)) event.preventDefault();
+  }
   get cartTotal(): number { return this.cart.reduce((s, f) => s + f.price, 0); }
 
   ngOnInit(): void {
@@ -130,10 +141,8 @@ export class RestaurantDetailComponent implements OnInit {
       this.snackBar.open('Delivery address is required', 'Close', { duration: 2500 });
       return;
     }
-    if (!this.phoneNumber.trim()) {
-      this.snackBar.open('Phone number is required', 'Close', { duration: 2500 });
-      return;
-    }
+    this.phoneCtrl.markAsTouched();
+    if (this.phoneCtrl.invalid) return;
     this.ordering = true;
     this.orderService.createOrder({
       userId: this.user.id,
@@ -141,14 +150,14 @@ export class RestaurantDetailComponent implements OnInit {
       note: this.orderNote,
       status: 'Pending',
       deliveryAddress: this.deliveryAddress.trim(),
-      phoneNumber: this.phoneNumber.trim()
+      phoneNumber: this.phoneCtrl.value!.trim()
     }).subscribe({
       next: () => {
         this.ordering = false;
         this.cart = [];
         this.orderNote = '';
         this.deliveryAddress = '';
-        this.phoneNumber = '';
+        this.phoneCtrl.reset();
         this.snackBar.open('Order placed successfully!', 'Close', { duration: 3000 });
       },
       error: () => {
