@@ -43,23 +43,13 @@
   flex-shrink: 0;
 }
 
-.brand-mark {
+.brand-logo {
   width: 34px;
   height: 34px;
-  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
   box-shadow: 0 2px 12px rgba(99,102,241,0.4);
-}
-
-.brand-mark mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-  color: white;
+  display: block;
 }
 
 .brand-name {

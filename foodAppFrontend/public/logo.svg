@@ -1,0 +1,51 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100" height="100" rx="20" fill="url(#bg)"/>
+
+  <!-- ── Speed lines (orange accent) ── -->
+  <rect x="3"  y="60" width="20" height="3" rx="1.5" fill="#f97316"/>
+  <rect x="3"  y="67" width="14" height="3" rx="1.5" fill="#f97316"/>
+  <rect x="3"  y="74" width="20" height="3" rx="1.5" fill="#f97316"/>
+
+  <!-- ── Wheels (dark core + orange hub) ── -->
+  <circle cx="28" cy="76" r="11" fill="#0d0f18"/>
+  <circle cx="28" cy="76" r="4"  fill="#f97316"/>
+  <circle cx="70" cy="76" r="11" fill="#0d0f18"/>
+  <circle cx="70" cy="76" r="4"  fill="#f97316"/>
+
+  <!-- ── Scooter body (white) ── -->
+  <rect x="26" y="66" width="47" height="7" rx="3.5" fill="white"/>
+  <ellipse cx="44" cy="62" rx="15" ry="9" fill="white"/>
+  <rect x="62" y="52" width="5"  height="16" rx="2.5" fill="white"/>
+  <!-- Handlebar (dark) -->
+  <rect x="54" y="49" width="16" height="5"  rx="2.5" fill="#0d0f18"/>
+  <!-- Seat (dark) -->
+  <ellipse cx="41" cy="56" rx="12" ry="5" fill="#0d0f18"/>
+
+  <!-- ── Chibi character ── -->
+  <!-- Head (white) -->
+  <circle cx="40" cy="40" r="14" fill="white"/>
+  <!-- Helmet dome (dark) -->
+  <path d="M26 40 Q26 26 40 26 Q54 26 54 40 Z" fill="#0d0f18"/>
+  <!-- Helmet visor brim (orange accent) -->
+  <ellipse cx="40" cy="40" rx="15" ry="4" fill="#f97316"/>
+  <!-- Eyes (dark dots + white shine) -->
+  <circle cx="35" cy="46" r="2.8" fill="#0d0f18"/>
+  <circle cx="45" cy="46" r="2.8" fill="#0d0f18"/>
+  <circle cx="36" cy="45" r="1"   fill="white"/>
+  <circle cx="46" cy="45" r="1"   fill="white"/>
+  <!-- Arm -->
+  <path d="M46 52 Q52 52 56 51" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- ── Delivery box (dark + orange stripe) ── -->
+  <rect x="67" y="50" width="20" height="19" rx="3" fill="#0d0f18"/>
+  <rect x="70" y="59" width="14" height="5"  rx="2" fill="#f97316"/>
+
+</svg>
