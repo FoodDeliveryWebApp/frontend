@@ -16,6 +16,10 @@
                 <span style="color:#888">No ratings yet</span>
               }
             </p>
+            <p class="delivery-fee-info">
+              <mat-icon style="vertical-align:middle;font-size:18px">directions_bike</mat-icon>
+              Delivery fee: <strong>{{ deliveryFee }} RSD</strong>
+            </p>
           </div>
         }
         <mat-divider></mat-divider>
@@ -35,7 +39,6 @@
                 </mat-card-header>
                 <mat-card-content>
                   <p class="price">{{ food.price | number:'1.2-2' }} RSD</p>
-                  <p class="delivery-price"><mat-icon class="delivery-icon">directions_bike</mat-icon> Delivery: {{ food.deliveryPrice }} RSD</p>
                 </mat-card-content>
                 <mat-card-actions>
                   <button mat-raised-button color="primary" (click)="addToCart(food)">
@@ -116,7 +119,9 @@
                 </div>
               }
               <mat-divider></mat-divider>
-              <p class="cart-total">Total: <strong>{{ cartTotal | number:'1.2-2' }} RSD</strong></p>
+              <p class="cart-total">Foods: <strong>{{ cartTotal | number:'1.2-2' }} RSD</strong></p>
+              <p class="cart-total">Delivery: <strong>{{ deliveryFee | number:'1.2-2' }} RSD</strong></p>
+              <p class="cart-total">Total: <strong>{{ grandTotal | number:'1.2-2' }} RSD</strong></p>
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Delivery Address *</mat-label>
                 <input matInput [(ngModel)]="deliveryAddress" placeholder="Street, number, city" />

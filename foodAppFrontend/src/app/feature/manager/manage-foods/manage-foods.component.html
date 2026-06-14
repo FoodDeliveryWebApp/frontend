@@ -19,7 +19,7 @@
                 <div class="food-details">
                   <span class="food-name">{{ food.name }}</span>
                   <span class="food-desc">{{ food.description }}</span>
-                  <span class="food-price">{{ food.price | number:'1.2-2' }} RSD &nbsp;|&nbsp; Delivery: {{ food.deliveryPrice | number:'1.2-2' }} RSD</span>
+                  <span class="food-price">{{ food.price | number:'1.2-2' }} RSD</span>
                 </div>
               </div>
               <mat-divider></mat-divider>
@@ -41,10 +41,6 @@
                   <mat-form-field appearance="outline" class="half">
                     <mat-label>Price (RSD)</mat-label>
                     <input matInput type="number" formControlName="price" />
-                  </mat-form-field>
-                  <mat-form-field appearance="outline" class="half">
-                    <mat-label>Delivery Price (RSD)</mat-label>
-                    <input matInput type="number" formControlName="deliveryPrice" />
                   </mat-form-field>
                 </div>
                 <div class="edit-row">

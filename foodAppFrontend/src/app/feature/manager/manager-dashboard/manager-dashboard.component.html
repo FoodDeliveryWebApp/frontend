@@ -10,6 +10,28 @@
         <h1 class="section-title">{{ restaurant.name }}</h1>
         <p class="section-subtitle">{{ restaurant.cuisine }} · {{ restaurant.address }}</p>
         <p class="section-subtitle"><mat-icon class="inline-icon">phone</mat-icon> {{ restaurant.phoneNumber }}</p>
+        <div class="delivery-fee-row">
+          @if (!editingFee) {
+            <p class="section-subtitle">
+              <mat-icon class="inline-icon">directions_bike</mat-icon>
+              Delivery fee: <strong>{{ restaurant.deliveryFee }} RSD</strong>
+              <button mat-icon-button (click)="startEditFee()" title="Edit delivery fee">
+                <mat-icon style="font-size:18px">edit</mat-icon>
+              </button>
+            </p>
+          } @else {
+            <div class="fee-edit-row">
+              <mat-form-field appearance="outline" style="width:160px">
+                <mat-label>Delivery Fee (RSD)</mat-label>
+                <input matInput type="number" [formControl]="feeCtrl" />
+              </mat-form-field>
+              <button mat-raised-button color="primary" (click)="saveFee()" [disabled]="savingFee || feeCtrl.invalid">
+                @if (savingFee) { <mat-spinner diameter="18"></mat-spinner> } @else { Save }
+              </button>
+              <button mat-button (click)="cancelEditFee()">Cancel</button>
+            </div>
+          }
+        </div>
       } @else {
         <h1 class="section-title">Manager Dashboard</h1>
         <p class="section-subtitle">Manage your restaurant operations</p>

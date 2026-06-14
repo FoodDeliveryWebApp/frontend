@@ -27,7 +27,6 @@ export class AddFoodComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     price: new FormControl<number | null>(null, [Validators.required, Validators.min(0.01)]),
-    deliveryPrice: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
     description: new FormControl('', [Validators.required]),
   });
 
@@ -70,7 +69,6 @@ export class AddFoodComponent implements OnInit {
         this.restaurantService.addFood(this.restaurantId!, {
           name: v.name!,
           price: v.price!,
-          deliveryPrice: v.deliveryPrice!,
           description: v.description!,
           imageUrl,
           restaurantId: this.restaurantId!

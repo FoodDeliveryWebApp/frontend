@@ -51,6 +51,7 @@ export class ManageRestaurantsComponent implements OnInit {
     address: new FormControl('', [Validators.required]),
     phoneNumber: new FormControl('', [Validators.required]),
     cuisine: new FormControl('', [Validators.required]),
+    deliveryFee: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
     isActive: new FormControl(true),
     managerName: new FormControl(''),
     managerSurname: new FormControl(''),
@@ -87,6 +88,7 @@ export class ManageRestaurantsComponent implements OnInit {
       address: r.address,
       phoneNumber: r.phoneNumber,
       cuisine: this.cuisines.find(c => c.toLowerCase() === r.cuisine?.toLowerCase()) ?? r.cuisine,
+      deliveryFee: r.deliveryFee,
       isActive: r.isActive,
       managerName: r.manager?.name ?? '',
       managerSurname: r.manager?.surname ?? '',
@@ -135,6 +137,7 @@ export class ManageRestaurantsComponent implements OnInit {
       address: v.address!,
       phoneNumber: v.phoneNumber!,
       cuisine: v.cuisine!,
+      deliveryFee: v.deliveryFee ?? 0,
       imageUrl,
       isActive: v.isActive!,
       manager: replaceManager ? {

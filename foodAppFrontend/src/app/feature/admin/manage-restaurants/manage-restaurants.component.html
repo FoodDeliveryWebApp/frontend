@@ -20,6 +20,7 @@
                   <span class="rest-name">{{ r.name }}</span>
                   <span class="rest-meta">{{ r.address }}</span>
                   <span class="rest-meta">{{ r.phoneNumber }} &middot; {{ r.cuisine }}</span>
+                  <span class="rest-meta"><mat-icon style="font-size:14px;vertical-align:middle">directions_bike</mat-icon> Delivery fee: {{ r.deliveryFee }} RSD</span>
                   @if (r.manager) {
                     <span class="rest-manager">Manager: {{ r.manager.name }} {{ r.manager.surname }} (@{{ r.manager.username }})</span>
                   }
@@ -60,6 +61,13 @@
                         <mat-option [value]="c">{{ c }}</mat-option>
                       }
                     </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="edit-row">
+                  <mat-form-field appearance="outline" class="half">
+                    <mat-label>Delivery Fee (RSD)</mat-label>
+                    <input matInput type="number" formControlName="deliveryFee" />
+                    <mat-icon matSuffix>directions_bike</mat-icon>
                   </mat-form-field>
                 </div>
                 <div class="toggle-row">
